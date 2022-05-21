@@ -18,15 +18,6 @@ CREATE TABLE IF NOT EXISTS service (
                                         budapest_pass BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE IF NOT EXISTS ticket (
-                                        train_id INTEGER NOT NULL,
-                                        supplement BOOLEAN DEFAULT FALSE,
-                                        seat_reservation BOOLEAN DEFAULT FALSE,
-                                        inter_city BOOLEAN DEFAULT FALSE,
-                                        euro_city BOOLEAN DEFAULT FALSE,
-                                        euro_night BOOLEAN DEFAULT FALSE
-);
-
 CREATE TABLE IF NOT EXISTS station (
                                         train_id INTEGER NOT NULL,
                                         distance INTEGER NOT NULL,
