@@ -38,5 +38,34 @@ INSERT INTO
     train (id, type, highest_class)
 VALUES
     (39519, 'Passenger',   2),
-    (900,   'InterCity',   2);
+    (900,   'InterCity',   2),
+    (952,   'InterCity',   2);
+    
+--Székesfehérvár
+INSERT INTO
+    train (id, type, highest_class)
+VALUES
+    (8392,   'InterRegio',   2);
+    
+--Kaposvár
+INSERT INTO
+    train (id, type, highest_class)
+VALUES
+    (9690,  'InterRegio',   2),
+    (829,   'InterCity',    2);
+    
+--Szekszárd
+INSERT INTO
+    train (id, type, highest_class)
+VALUES
+    (8309,   'InterRegio',    2);
+    
+--Budapest
+INSERT INTO
+    train (id, type, highest_class)
+VALUES
+    (822,   'InterCity',    2),
+    (6110,  'Passenger',    2),
+    (182,   'InterCity',    1),
+    (540,   'InterRegio',   2);
     
