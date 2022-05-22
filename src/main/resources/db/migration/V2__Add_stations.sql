@@ -2,7 +2,7 @@
 
 --Győr-Tatabánya
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (949, 0,    'Győr',                 NULL,       '06:21',    1),
     (949, 37,   'Komárom',              '06:37',    '06:38',    4),
@@ -13,7 +13,7 @@ VALUES
     
 --Győr-Szombathely
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (922, 0,    'Győr',         NULL,       '09:45',    NULL),
     (922, 31,   'Csorna',       '10:25',    '10:34',    NULL),
@@ -22,7 +22,7 @@ VALUES
     
 --Győr-Veszprém
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (39510, 0,  'Győr',                 NULL,       '05:13',    6),
     (39510, 2,  'Győr-Gyárváros',       '05:16',    '05:16',    NULL),
@@ -41,7 +41,7 @@ VALUES
     
 --Győr-Kaposvár
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (9605, 0,   'Győr',                 NULL,       '11:11',    4),
     (9605, 2,   'Győr-Gyárváros',       '11:14',    '11:14',    NULL),
@@ -80,7 +80,7 @@ VALUES
     
 --Tatabánya-Győr
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (912, 0,    'Budapest-Keleti',      NULL,       '06:15',    11),
     (912, 13,   'Budapest-Kelenföld',   '06:28',    '06:29',    15),
@@ -94,7 +94,7 @@ VALUES
     
 --Szombathely-Győr
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (925, 0,    'Szombathely',  NULL,       '10:38',    NULL),
     (925, 44,   'Répcelak',     '11:10',    '11:11',    NULL),
@@ -103,7 +103,7 @@ VALUES
     
 --Szombathely-Budapest-Keleti
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (919, 0,    'Szentgotthárd',        NULL,       '04:31',    NULL),
     (919, 2,    'Haris',                '04:33',    '04:33',    NULL),
@@ -124,7 +124,7 @@ VALUES
     
 --Szombathely-Veszprém
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (9019, 0,    'Szombathely',      NULL,       '04:50',    NULL),
     (9019, 8,    'Vép',              '04:56',    '04:56',    NULL),
@@ -152,7 +152,7 @@ VALUES
     
 --Szombathely-Zalaegerszeg
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (9826, 0,   'Szombathely',              NULL,       '14:37',    NULL),
     (9826, 5,   'Gyöngyöshermán',           '14:42',    '14:42',    NULL),
@@ -169,7 +169,7 @@ VALUES
     
 --Szombathely-Székesfehérvár
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (909, 0,    'Szombathely',          NULL,       '06:24',    NULL),
     (909, 8,    'Vép',                  '06:30',    '06:31',    NULL),
@@ -195,7 +195,7 @@ VALUES
     
 --Szombathely-Pécs
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (8900, 0,   'Szombathely',              NULL,       '05:09',    NULL),
     (8900, 20,  'Püspökmolnári',            '05:24',    '05:26',    NULL),
@@ -222,7 +222,7 @@ VALUES
     
 --Zalaegerszeg-Szombathely
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (9819, 0,   'Zalaegerszeg',             NULL,       '03:49',    4),
     (9819, 9,   'Zalaszentiván',            '03:57',    '04:00',    NULL),
@@ -239,7 +239,7 @@ VALUES
     
 --Zalaegerszeg-Budapest-Déli
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (959, 0,    'Zalaegerszeg',         NULL,       '05:49',    3),
     (959, 9,    'Zalaszentiván',        '05:57',    '06:00',    NULL),
@@ -256,7 +256,7 @@ VALUES
     
 --Veszprém-Győr
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (39519, 0,  'Veszprém',             NULL,       '05:05',    4),
     (39519, 21, 'Zirc',                 '05:34',    '05:35',    NULL),
@@ -274,7 +274,7 @@ VALUES
     
 --Veszprém-Szombathely
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (900, 0,    'Budapest-Déli',        NULL,       '06:00',    6),
     (900, 4,    'Budapest-Kelenföld',   '06:06',    '06:07',    4),
@@ -293,7 +293,7 @@ VALUES
     
 --Veszprém-Zalaegerszeg
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (952, 0,    'Budapest-Déli',        NULL,       '07:00',    7),
     (952, 4,    'Budapest-Kelenföld',   '07:06',    '07:07',    3),
@@ -310,7 +310,7 @@ VALUES
     
 --Székesfehérvár-Szekszárd
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (8392, 0,   'Székesfehérvár',   NULL,       '08:02',    7),
     (8392, 14,  'Belsőbáránd',      '08:17',    '08:17',    NULL),
@@ -331,7 +331,7 @@ VALUES
     
 --Kaposvár-Győr
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (9690, 0,   'Kaposvár',             NULL,       '06:17',    1),
     (9690, 3,   'Kapostüskevár',        '06:20',    '06:20',    NULL),
@@ -374,7 +374,7 @@ VALUES
     
 --Kaposvár-Budapest-Keleti
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (829, 0,    'Gyékényes',            NULL,       '04:51',    NULL),
     (829, 11,   'Csurgó',               '05:02',    '05:03',    NULL),
@@ -395,7 +395,7 @@ VALUES
     
 --Szekszárd-Székesfehérvár
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (8309, 0,   'Baja',             NULL,       '05:14',    NULL),
     (8309, 11,  'Pörböly',          '05:24',    '05:24',    NULL),
@@ -416,7 +416,7 @@ VALUES
     
 --Budapest-Keleti-Kaposvár
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (822, 0,    'Budapest-Keleti',      NULL,       '06:30',    7),
     (822, 13,   'Budapest-Kelenföld',   '06:46',    '06:53',    14),
@@ -428,7 +428,7 @@ VALUES
     
 --Budapest-Nyugati-Nyíregyháza
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (6110, 0,   'Budapest-Nyugati',     NULL,       '02:38',    NULL),
     (6110, 5,   'Zugló',                '02:43',    '02:44',    NULL),
@@ -471,7 +471,7 @@ VALUES
     
 --Budapest-Keleti-Miskolc-Tiszai
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (182, 0,   'Budapest-Keleti',   NULL,       '06:30',    9),
     (182, 138, 'Mezőkövesd',        '07:55',    '07:56',    NULL),
@@ -485,7 +485,7 @@ VALUES
     
 --Budapest-Keleti-Eger
 INSERT INTO
-    station (train_id, distance, name, arrival_time, departure_time, platform)
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
 VALUES
     (540, 0,    'Budapest-Keleti',  NULL,       '05:00',    1),
     (540, 36,   'Gödöllő',          '05:26',    '05:27',    NULL),
@@ -503,3 +503,256 @@ VALUES
     (540, 125,  'Füzesabony',       '06:40',    '06:50',    3),
     (540, 132,  'Maklár',           '06:57',    '06:58',    NULL),
     (540, 142,  'Eger',             '07:07',    NULL,       1);
+    
+--Budapest-Nyugati-Szeged
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (700, 0,    'Budapest-Nyugati', NULL,       '05:53',    12),
+    (700, 5,    'Zugló',            '05:58',    '05:59',    NULL),
+    (700, 11,   'Kőbánya-Kispest',  '06:06',    '06:07',    4),
+    (700, 18,   'Ferihegy',         '06:12',    '06:13',    NULL),
+    (700, 73,   'Cegléd',           '06:47',    '06:48',    4),
+    (700, 91,   'Nagykőrös',        '06:59',    '07:00',    NULL),
+    (700, 106,  'Kecskemét',        '07:10',    '07:11',    3),
+    (700, 131,  'Kiskunfélegyháza', '07:27',    '07:30',    3),
+    (700, 160,  'Kistelek',         '07:49',    '07:50',    NULL),
+    (700, 175,  'Szatymaz',         '08:00',    '08:01',    NULL),
+    (700, 191,  'Szeged',           '08:15',    NULL,       4);
+    
+--Budapest-Keleti-Békéscsaba
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (7400, 0,    'Budapest-Keleti',  NULL,       '06:10',    6),
+    (7400, 100,  'Szolnok',          '07:32',    '07:33',    10),
+    (7400, 141,  'Mezőtúr',          '07:58',    '07:59',    NULL),
+    (7400, 151,  'Nagylapos',        '08:05',    '08:05',    NULL),
+    (7400, 159,  'Gyoma',            '08:11',    '08:12',    NULL),
+    (7400, 179,  'Mezőberény',       '08:24',    '08:25',    NULL),
+    (7400, 185,  'Murony',           '08:29',    '08:30',    NULL),
+    (7400, 196,  'Békéscsaba',       '08:39',    NULL,       1);
+    
+--Eger-Budapest-Keleti
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (5509, 0,   'Eger',             NULL,       '05:00',    2),
+    (5509, 5,   'Andornaktálya',    '05:05',    '05:05',    NULL),
+    (5509, 10,  'Maklár',           '05:10',    '05:11',    NULL),
+    (5509, 17,  'Füzesabony',       '05:18',    '05:20',    4),
+    (5509, 29,  'Kál-Kápolna',      '05:28',    '05:29',    NULL),
+    (5509, 36,  'Nagyút',           '05:34',    '05:35',    NULL),
+    (5509, 41,  'Ludas',            '05:39',    '05:40',    NULL),
+    (5509, 45,  'Karácsond',        '05:43',    '05:43',    NULL),
+    (5509, 51,  'Adács',            '05:47',    '05:47',    NULL),
+    (5509, 55,  'Vámosgyörk',       '05:50',    '05:51',    NULL),
+    (5509, 75,  'Hatvan',           '06:04',    '06:05',    5),
+    (5509, 83,  'Tura',             '06:10',    '06:11',    NULL),
+    (5509, 91,  'Aszód',            '06:16',    '06:17',    NULL),
+    (5509, 93,  'Bag',              '06:19',    '06:19',    NULL),
+    (5509, 103, 'Máriabesnyő',      '06:26',    '06:26',    NULL),
+    (5509, 106, 'Gödöllő',          '06:29',    '06:30',    NULL),
+    (5509, 142, 'Budapest-Keleti',  '07:00',    NULL,       5);
+    
+--Miskolc-Tiszai-Nyíregyháza
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (5140, 0,   'Miskolc-Tiszai',       NULL,       '06:37',    6),
+    (5140, 5,   'Felsőzsolca',          '06:42',    '06:43',    NULL),
+    (5140, 15,  'Hernádnémeti-Bőcs',    '06:51',    '06:52',    NULL),
+    (5140, 20,  'Tiszalúc',             '06:57',    '06:58',    NULL),
+    (5140, 29,  'Taktaharkány',         '07:05',    '07:06',    NULL),
+    (5140, 32,  'Taktaszada',           '07:08',    '07:09',    NULL),
+    (5140, 38,  'Szerencs',             '07:15',    '07:16',    3),
+    (5140, 43,  'Mezőzombor',           '07:20',    '07:21',    NULL),
+    (5140, 50,  'Tarcal',               '07:27',    '07:28',    NULL),
+    (5140, 56,  'Tokaj',                '07:33',    '07:34',    NULL),
+    (5140, 62,  'Rakamaz',              '07:39',    '07:45',    NULL),
+    (5140, 69,  'Virányos',             '07:52',    '07:53',    NULL),
+    (5140, 72,  'Görögszállás',         '07:57',    '07:59',    NULL),
+    (5140, 78,  'Nyírtelek',            '08:04',    '08:05',    NULL),
+    (5140, 81,  'Füzesbokor',           '08:08',    '08:09',    NULL),
+    (5140, 88,  'Nyíregyháza',          '08:15',    NULL,       9);
+    
+--Miskolc-Tiszai-Budapest-Nyugati
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (582, 0,    'Miskolc-Tiszai',   NULL,       '07:30',    9),
+    (582, 38,   'Szerencs',         '07:54',    '07:55',    3),
+    (582, 56,   'Tokaj',            '08:07',    '08:08',    NULL),
+    (582, 62,   'Rakamaz',          '08:13',    '08:14',    NULL),
+    (582, 88,   'Nyíregyháza',      '08:31',    '08:34',    1),
+    (582, 137,  'Debrecen',         '09:05',    '09:07',    4),
+    (582, 157,  'Hajdúszoboszló',   '09:21',    '09:22',    NULL),
+    (582, 181,  'Püspökladány',     '09:36',    '09:37',    4),
+    (582, 258,  'Szolnok',          '10:20',    '10:21',    7),
+    (582, 285,  'Cegléd',           '10:41',    '10:43',    5),
+    (582, 340,  'Ferihegy',         '11:14',    '11:15',    NULL),
+    (582, 347,  'Kőbánya-Kispest',  '11:20',    '11:21',    1),
+    (582, 353,  'Zugló',            '11:28',    '11:29',    NULL),
+    (582, 358,  'Budapest-Nyugati', '11:37',    NULL,       2);
+    
+--Nyíregyháza-Miskolc-Tiszai
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (5119, 0,   'Nyíregyháza',          NULL,       '02:15',    1),
+    (5119, 7,   'Füzesbokor',           '02:25',    '02:25',    NULL),
+    (5119, 10,  'Nyírtelek',            '02:32',    '02:32',    NULL),
+    (5119, 16,  'Görögszállás',         '02:44',    '02:44',    NULL),
+    (5119, 19,  'Virányos',             '02:50',    '02:50',    NULL),
+    (5119, 26,  'Rakamaz',              '03:00',    '03:00',    NULL),
+    (5119, 32,  'Tokaj',                '03:10',    '03:10',    NULL),
+    (5119, 38,  'Tarcal',               '03:22',    '03:22',    NULL),
+    (5119, 45,  'Mezőzombor',           '03:33',    '03:33',    NULL),
+    (5119, 50,  'Szerencs',             '03:43',    '03:52',    3),
+    (5119, 56,  'Taktaszada',           '03:57',    '03:58',    NULL),
+    (5119, 59,  'Taktaharkány',         '04:00',    '04:01',    NULL),
+    (5119, 68,  'Tiszalúc',             '04:08',    '04:09',    NULL),
+    (5119, 73,  'Hernádnémeti-Bőcs',    '04:13',    '04:14',    NULL),
+    (5119, 83,  'Felsőzsolca',          '04:21',    '04:22',    NULL),
+    (5119, 88,  'Miskolc-Tiszai',       '04:28',    NULL,       9);
+    
+--Debrecen-Miskolc-Tiszai
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (682, 0,    'Szolnok',              NULL,       '05:10',    NULL),
+    (682, 10,   'Szajol',               '05:20',    '05:21',    NULL),
+    (682, 19,   'Törökszentmiklós',     '05:27',    '05:28',    NULL),
+    (682, 31,   'Fegyvernek-Örményes',  '05:35',    '05:36',    NULL),
+    (682, 46,   'Kisújszállás',         '05:45',    '05:46',    NULL),
+    (682, 62,   'Karcag',               '05:56',    '05:57',    NULL),
+    (682, 77,   'Püspökladány',         '06:08',    '06:11',    6),
+    (682, 88,   'Kaba',                 '06:19',    '06:20',    NULL),
+    (682, 101,  'Hajdúszoboszló',       '06:29',    '06:30',    NULL),
+    (682, 109,  'Ebes',                 '06:35',    '06:36',    NULL),
+    (682, 121,  'Debrecen',             '06:46',    '06:53',    8),
+    (682, 170,  'Nyíregyháza',          '07:24',    '07:26',    1),
+    (682, 202,  'Tokaj',                '07:47',    '07:48',    NULL),
+    (682, 220,  'Szerencs',             '08:01',    '08:02',    3),
+    (682, 258,  'Miskolc-Tiszai',       '08:27',    '08:30',    3),
+    (682, 315,  'Füzesabony',           '09:03',    '09:04',    4),
+    (682, 440,  'Budapest-Keleti',      '10:30',    NULL,       6);
+    
+--Szolnok-Kecskemét
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (37117, 0,  'Szolnok',              NULL,       '07:30',    1),
+    (37117, 6,  'Piroska',              '07:36',    '07:36',    NULL),
+    (37117, 11, 'Tószeg',               '07:47',    '07:48',    NULL),
+    (37117, 16, 'Tiszavárkony',         '07:53',    '07:53',    NULL),
+    (37117, 18, 'Tiszajenő-Vezseny',    '07:56',    '07:56',    NULL),
+    (37117, 21, 'Tiszajenő alsó',       '07:59',    '07:59',    NULL),
+    (37117, 25, 'Óbög',                 '08:03',    '08:03',    NULL),
+    (37117, 28, 'Újbög',                '08:06',    '08:06',    NULL),
+    (37117, 30, 'Tiszakécske',          '08:10',    '08:11',    NULL),
+    (37117, 35, 'Kerekdomb',            '08:19',    '08:20',    NULL),
+    (37117, 40, 'Lakitelek',            '08:28',    '08:30',    NULL),
+    (37117, 41, 'Árpádszállás',         '08:32',    '08:33',    NULL),
+    (37117, 43, 'Szikra',               '08:35',    '08:36',    NULL),
+    (37117, 46, 'Világoshegy',          '08:41',    '08:41',    NULL),
+    (37117, 47, 'Nyárjas',              '08:43',    '08:44',    NULL),
+    (37117, 51, 'Nyárlőrinc alsó',      '08:48',    '08:49',    NULL),
+    (37117, 53, 'Nyárlőrinc',           '08:52',    '08:53',    NULL),
+    (37117, 55, 'Nyárlőrinci szőlők',   '08:56',    '08:56',    NULL),
+    (37117, 57, 'Kisfái',               '08:59',    '09:00',    NULL),
+    (37117, 59, 'Alsóúrrét',            '09:03',    '09:04',    NULL),
+    (37117, 67, 'Kecskemét',            '09:13',    NULL,       6);
+    
+--Kecskemét-Szolnok
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (37120, 0,  'Kecskemét',            NULL,       '04:25',    6),
+    (37120, 8,  'Alsóúrrét',            '04:35',    '04:36',    NULL),
+    (37120, 10, 'Kisfái',               '04:40',    '04:40',    NULL),
+    (37120, 12, 'Nyárlőrinci szőlők',   '04:43',    '04:44',    NULL),
+    (37120, 14, 'Nyárlőrinc',           '04:47',    '04:48',    NULL),
+    (37120, 16, 'Nyárlőrinc alsó',      '04:51',    '04:52',    NULL),
+    (37120, 20, 'Nyárjas',              '04:57',    '04:58',    NULL),
+    (37120, 21, 'Világoshegy',          '05:00',    '05:01',    NULL),
+    (37120, 24, 'Szikra',               '05:05',    '05:05',    NULL),
+    (37120, 26, 'Árpádszállás',         '05:07',    '05:08',    NULL),
+    (37120, 27, 'Lakitelek',            '05:11',    '05:33',    NULL),
+    (37120, 32, 'Kerekdomb',            '05:41',    '05:41',    NULL),
+    (37120, 37, 'Tiszakécske',          '05:49',    '05:49',    NULL),
+    (37120, 39, 'Újbög',                '05:53',    '05:53',    NULL),
+    (37120, 42, 'Óbög',                 '05:57',    '05:57',    NULL),
+    (37120, 46, 'Tiszajenő alsó',       '06:01',    '06:01',    NULL),
+    (37120, 49, 'Tiszajenő-Vezseny',    '06:04',    '06:04',    NULL),
+    (37120, 51, 'Tiszavárkony',         '06:07',    '06:07',    NULL),
+    (37120, 56, 'Tószeg',               '06:12',    '06:12',    NULL),
+    (37120, 61, 'Piroska',              '06:23',    '06:23',    NULL),
+    (37120, 67, 'Szolnok',              '06:29',    NULL,       1);
+    
+--Szeged-Budapest-Nyugati
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (7009, 0,   'Szeged',           NULL,       '04:34',    2),
+    (7009, 16,  'Szatymaz',         '04:47',    '04:48',    NULL),
+    (7009, 31,  'Kistelek',         '04:57',    '04:58',    NULL),
+    (7009, 49,  'Petőfiszállás',    '05:10',    '05:11',    NULL),
+    (7009, 54,  'Selymes',          '05:14',    '05:15',    NULL),
+    (7009, 60,  'Kiskunfélegyháza', '05:20',    '05:21',    3),
+    (7009, 85,  'Kecskemét',        '05:37',    '05:38',    3),
+    (7009, 100, 'Nagykőrös',        '05:49',    '05:50',    NULL),
+    (7009, 107, 'Nyársapát',        '05:55',    '05:55',    NULL),
+    (7009, 118, 'Cegléd',           '06:03',    '06:04',    4),
+    (7009, 173, 'Ferihegy',         '06:39',    '06:40',    NULL),
+    (7009, 180, 'Kőbánya-Kispest',  '06:45',    '06:46',    1),
+    (7009, 186, 'Zugló',            '06:53',    '06:54',    NULL),
+    (7009, 191, 'Budapest-Nyugati', '07:02',    NULL,       12);
+    
+--Szeged-Békéscsaba
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (7740, 0,   'Szeged',                       NULL,       '05:28',    2),
+    (7740, 7,   'Szeged-Rókus',                 '05:36',    '05:37',    NULL),
+    (7740, 29,  'Hódmezővásárhelyi Népkert',    '05:53',    '05:54',    NULL),
+    (7740, 31,  'Hódmezővásárhely',             '05:58',    '06:01',    NULL),
+    (7740, 41,  'Kútvölgy',                     '06:10',    '06:11',    NULL),
+    (7740, 50,  'Székkutas',                    '06:18',    '06:19',    NULL),
+    (7740, 62,  'Orosháza',                     '06:29',    '06:31',    NULL),
+    (7740, 70,  'Orosházi tanyák',              '06:39',    '06:40',    NULL),
+    (7740, 76,  'Csorvás',                      '06:47',    '06:48',    NULL),
+    (7740, 80,  'Csorvás alsó',                 '06:52',    '06:53',    NULL),
+    (7740, 87,  'Telekgerendás',                '06:59',    '07:00',    NULL),
+    (7740, 91,  'Fürjes',                       '07:05',    '07:06',    NULL),
+    (7740, 97,  'Békéscsaba',                   '07:12',    NULL,       2);
+    
+--Békéscsaba-Budapest-Keleti
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (7407, 0,   'Békéscsaba',       NULL,       '09:20',    3),
+    (7407, 11,  'Murony',           '09:26',    '09:27',    NULL),
+    (7407, 17,  'Mezőberény',       '09:31',    '09:32',    NULL),
+    (7407, 26,  'Csárdaszállás',    '09:37',    '09:38',    NULL),
+    (7407, 37,  'Gyoma',            '09:45',    '09:46',    NULL),
+    (7407, 55,  'Mezőtúr',          '09:59',    '10:00',    NULL),
+    (7407, 96,  'Szolnok',          '10:26',    '10:27',    16),
+    (7407, 196, 'Budapest-Keleti',  '11:50',    NULL,       7);
+    
+--Békéscsaba-Szeged
+INSERT INTO
+    stop (train_id, distance, name, arrival_time, departure_time, platform)
+VALUES
+    (7749, 0,   'Békéscsaba',                   NULL,       '05:47',    5),
+    (7749, 10,  'Telekgerendás',                '05:57',    '05:58',    NULL),
+    (7749, 17,  'Csorvás alsó',                 '06:04',    '06:05',    NULL),
+    (7749, 21,  'Csorvás',                      '06:09',    '06:10',    NULL),
+    (7749, 27,  'Orosházi tanyák',              '06:17',    '06:18',    NULL),
+    (7749, 35,  'Orosháza',                     '06:26',    '06:32',    NULL),
+    (7749, 47,  'Székkutas',                    '06:42',    '06:43',    NULL),
+    (7749, 56,  'Kútvölgy',                     '06:50',    '06:51',    NULL),
+    (7749, 66,  'Hódmezővásárhely',             '07:00',    '07:02',    NULL),
+    (7749, 68,  'Hódmezővásárhelyi Népkert',    '07:06',    '07:07',    NULL),
+    (7749, 90,  'Szeged-Rókus',                 '07:24',    '07:25',    NULL),
+    (7749, 97,  'Szeged',                       '07:33',    NULL,       2);

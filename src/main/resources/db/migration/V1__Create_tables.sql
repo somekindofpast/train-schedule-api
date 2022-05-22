@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS service (
                                         budapest_pass BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE IF NOT EXISTS station (
+CREATE TABLE IF NOT EXISTS stop (
                                         train_id INTEGER NOT NULL,
                                         distance INTEGER NOT NULL,
                                         name VARCHAR(255) NOT NULL,

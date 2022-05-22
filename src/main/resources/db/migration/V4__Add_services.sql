@@ -76,4 +76,65 @@ VALUES
     (822,   FALSE,  TRUE,   FALSE,  TRUE,   TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   FALSE),
     (6110,  FALSE,  TRUE,   FALSE,  TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   FALSE,  TRUE),
     (182,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   FALSE,  TRUE,   TRUE,   TRUE,   FALSE),
-    (540,   FALSE,  TRUE,   FALSE,  TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   TRUE,   TRUE);
+    (540,   FALSE,  TRUE,   FALSE,  TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   TRUE,   TRUE),
+    (700,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   FALSE,  TRUE,   TRUE,   TRUE),
+    (7400,  FALSE,  TRUE,   FALSE,  TRUE,   TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   FALSE);
+    
+--Eger
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (5509,   FALSE,  TRUE,   FALSE,  TRUE,   FALSE,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE);
+    
+--Miskolc
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (5140,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE),
+    (582,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE);
+    
+--Nyíregyháza
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (5119,   FALSE,  FALSE,  FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE);
+    
+--Debrecen
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (682,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   FALSE);
+    
+--Szolnok
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (37117,   FALSE,  FALSE,  FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE);
+    
+--Kecskemét
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (37120,   FALSE,  FALSE,  FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE);
+    
+--Szeged
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (7009,   FALSE,  TRUE,  FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  TRUE,   TRUE,   TRUE),
+    (7740,   FALSE,  FALSE, FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE);
+    
+--Békéscsaba
+INSERT INTO
+    service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
+             supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
+VALUES
+    (7407,   FALSE,  TRUE,  FALSE,  TRUE,   TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   FALSE),
+    (7749,   FALSE,  FALSE, FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  FALSE,  TRUE,   FALSE);
