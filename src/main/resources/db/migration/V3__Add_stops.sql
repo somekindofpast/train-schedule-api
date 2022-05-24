@@ -28,7 +28,7 @@ VALUES
     (39510, 2,  'Győr-Gyárváros',       '05:16',    '05:16',    NULL),
     (39510, 6,  'Győrszabadhegy',       '05:19',    '05:20',    NULL),
     (39510, 16, 'Nyúl',                 '05:31',    '05:31',    NULL),
-    (39510, 21, 'Pannonhalma'           '05:37',    '05:38',    NULL),
+    (39510, 21, 'Pannonhalma',          '05:37',    '05:38',    NULL),
     (39510, 27, 'Tarjánpuszta',         '05:45',    '05:46',    NULL),
     (39510, 28, 'Győrasszonyfa',        '05:48',    '05:48',    NULL),
     (39510, 34, 'Veszprémvarsány',      '05:55',    '05:56',    NULL),

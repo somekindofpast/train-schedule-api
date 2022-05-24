@@ -6,16 +6,16 @@ INSERT INTO
              supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
 VALUES
     (949,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   FALSE),
-    (949,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   FALSE,  FALSE,  TRUE,   FALSE),
+    (922,   FALSE,  TRUE,   TRUE,   TRUE,   TRUE,   TRUE,   FALSE,  FALSE,  TRUE,   FALSE),
     (39510, FALSE,  FALSE,  FALSE,  TRUE,   FALSE,  FALSE,  FALSE,  TRUE,   TRUE,   FALSE),
-    (39510, FALSE,  TRUE,   FALSE,  TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   TRUE,   FALSE);
+    (9605, FALSE,  TRUE,   FALSE,  TRUE,   FALSE,  FALSE,  TRUE,   TRUE,   TRUE,   FALSE);
     
 --Tatabánya
 INSERT INTO
     service (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory,
              supplement_compulsory, wheelchair_access, bicycle_reservation, any_weather_condition, budapest_pass)
 VALUES
-    (912, FALSE,  TRUE,   TRUE,  TRUE,   TRUE,  TRUE,  TRUE,   TRUE,   TRUE);
+    (912, FALSE,  TRUE,   TRUE,  TRUE,   TRUE,  TRUE,  TRUE,   TRUE,   TRUE,   FALSE);
     
 --Szombathely
 INSERT INTO

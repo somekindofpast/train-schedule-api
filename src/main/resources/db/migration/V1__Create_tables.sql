@@ -4,7 +4,18 @@ CREATE TABLE IF NOT EXISTS train (
                                         highest_class SMALLINT
 );
 
+CREATE TABLE IF NOT EXISTS stop (
+                                        id SERIAL PRIMARY KEY,
+                                        train_id INTEGER NOT NULL,
+                                        distance INTEGER NOT NULL,
+                                        name VARCHAR(255) NOT NULL,
+                                        arrival_time TIME,
+                                        departure_time TIME,
+                                        platform INTEGER
+);
+
 CREATE TABLE IF NOT EXISTS service (
+                                        id SERIAL PRIMARY KEY,
                                         train_id INTEGER NOT NULL,
                                         suburban BOOLEAN DEFAULT FALSE,
                                         long_distance BOOLEAN DEFAULT FALSE,
@@ -18,16 +29,8 @@ CREATE TABLE IF NOT EXISTS service (
                                         budapest_pass BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE IF NOT EXISTS stop (
-                                        train_id INTEGER NOT NULL,
-                                        distance INTEGER NOT NULL,
-                                        name VARCHAR(255) NOT NULL,
-                                        arrival_time TIME,
-                                        departure_time TIME,
-                                        platform INTEGER
-);
-
 CREATE TABLE IF NOT EXISTS cargo (
+                                        id SERIAL PRIMARY KEY,
                                         train_id INTEGER NOT NULL,
                                         name VARCHAR(30) NOT NULL,
                                         car_type VARCHAR(30) NOT NULL
