@@ -3,15 +3,21 @@ package com.codecool.trainscheduleapi;
 import org.flywaydb.core.Flyway;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class JavaTrainSchedule {
     private final static int FREIGHT_TRAIN_START = 50000;
+    private static List<String> freightCarTypes = new ArrayList<>();
+    private static List<List<String>> cargo = new ArrayList<>();
 
     public static void main(String[] args) {
         Flyway flyway = Flyway.configure().dataSource(System.getenv("DATABASE_URL"), System.getenv("DATABASE_USERNAME"), System.getenv("DATABASE_PASSWORD")).load();
 
-        flyway.clean();
-        //buildDatabase(flyway);
+        //flyway.clean();
+        buildDatabase(flyway);
     }
 
     private static void buildDatabase(Flyway flyway) {
@@ -20,6 +26,8 @@ public class JavaTrainSchedule {
         Connection con = new ConnectionUtility().getConnection();
         generateTrains(con);
         generateStops(con);
+        generateServices(con);
+        generateCargo(con);
     }
 
     private static void generateTrains(Connection con) {
@@ -159,5 +167,53 @@ public class JavaTrainSchedule {
         stmt.setBoolean(10, anyWeatherCondition);
         stmt.setBoolean(11, budapestPass);
         stmt.executeUpdate();
+    }
+
+    private static void generateCargo(Connection con) {
+        try {
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery("select * from train");
+
+            initializeCargo();
+            while (rs.next()) {
+                String type = rs.getString("type");
+                if(!type.toLowerCase().equals("freight"))
+                    continue;
+                int trainId = rs.getInt("id");
+
+                int numberOfCars = new Random().nextInt(10) + 10;
+                for (int i = 0; i < numberOfCars; i++) {
+                    int carTypeNumber = new Random().nextInt(freightCarTypes.size());
+                    int cargoNumber = new Random().nextInt(cargo.get(carTypeNumber).size());
+
+                    PreparedStatement stmt = con.prepareStatement("INSERT INTO cargo" +
+                            " (train_id, name, car_type) VALUES (?,?,?)");
+                    stmt.setInt(1, trainId);
+                    stmt.setString(2, cargo.get(carTypeNumber).get(cargoNumber));
+                    stmt.setString(3, freightCarTypes.get(carTypeNumber));
+                    stmt.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void initializeCargo() {
+        freightCarTypes = new ArrayList<>();
+        cargo = new ArrayList<>();
+
+        freightCarTypes.addAll(Arrays.asList(
+                "boxcar", "hopper car", "flatcar", "tank car", "gondola", "coil car", "refrigerator car", "specialty car"
+        ));
+
+        cargo.add(new ArrayList<String>(Arrays.asList("consumer packaged goods", "auto parts", "paper reams", "canned goods", "bagged products")));
+        cargo.add(new ArrayList<String>(Arrays.asList("coal", "ore", "salt", "sand", "grain & wheat", "corn", "sugar", "fertilizer")));
+        cargo.add(new ArrayList<String>(Arrays.asList("poles & pipes", "logs & cut lumber", "steel plates & beams", "wind turbines", "machinery & equipment", "intermodal containers")));
+        cargo.add(new ArrayList<String>(Arrays.asList("oil", "water", "chemicals", "petroleum-based products", "liquid hydrogen")));
+        cargo.add(new ArrayList<String>(Arrays.asList("scrap metal", "steel plates & coils", "rail track & ties", "gravel", "construction debris", "miscellaneous waste")));
+        cargo.add(new ArrayList<String>(Arrays.asList("steel coils", "copper coils", "plastic tubing")));
+        cargo.add(new ArrayList<String>(Arrays.asList("frozen meat & fish", "fresh produce", "milk", "beer", "ice")));
+        cargo.add(new ArrayList<String>(Arrays.asList("automotive vehicles", "ballast", "aggregate", "miscellaneous items")));
     }
 }
