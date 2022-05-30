@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS stop (
 CREATE TABLE IF NOT EXISTS service (
                                         id SERIAL PRIMARY KEY,
                                         train_id INTEGER NOT NULL,
-                                        suburban BOOLEAN DEFAULT FALSE,
                                         long_distance BOOLEAN DEFAULT FALSE,
                                         first_class BOOLEAN DEFAULT FALSE,
                                         second_class BOOLEAN DEFAULT FALSE,

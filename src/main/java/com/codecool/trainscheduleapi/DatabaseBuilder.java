@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class JavaTrainSchedule {
+public class DatabaseBuilder {
     private final static int FREIGHT_TRAIN_START = 50000;
     private static List<String> freightCarTypes = new ArrayList<>();
     private static List<List<String>> cargo = new ArrayList<>();
@@ -16,13 +16,12 @@ public class JavaTrainSchedule {
     public static void main(String[] args) {
         Flyway flyway = Flyway.configure().dataSource(System.getenv("DATABASE_URL"), System.getenv("DATABASE_USERNAME"), System.getenv("DATABASE_PASSWORD")).load();
 
-        //flyway.clean();
-        buildDatabase(flyway);
+        flyway.clean();
+        flyway.migrate();
+        buildDatabase();
     }
 
-    private static void buildDatabase(Flyway flyway) {
-        flyway.migrate();
-
+    public static void buildDatabase() {
         Connection con = new ConnectionUtility().getConnection();
         generateTrains(con);
         generateStops(con);
@@ -112,7 +111,6 @@ public class JavaTrainSchedule {
 
             while (rs.next()) {
                 int trainId = rs.getInt("train_id");
-                boolean suburban = rs.getBoolean("suburban");
                 boolean longDistance = rs.getBoolean("long_distance");
                 boolean firstClass = rs.getBoolean("first_class");
                 boolean secondClass = rs.getBoolean("second_class");
@@ -124,12 +122,12 @@ public class JavaTrainSchedule {
                 boolean budapestPass = rs.getBoolean("budapest_pass");
 
                 insertService(con, (trainId % 2 == 0 ? trainId + 2 : trainId - 2),
-                        suburban, longDistance, firstClass, secondClass, reservationCompulsory,
-                        supplementCompulsory, wheelchairAccess, bicycleReservation, anyWeatherCondition, budapestPass);
+                        longDistance, firstClass, secondClass, reservationCompulsory, supplementCompulsory,
+                        wheelchairAccess, bicycleReservation, anyWeatherCondition, budapestPass);
 
                 insertService(con, (trainId % 2 == 0 ? trainId + 4 : trainId - 4),
-                        suburban, longDistance, firstClass, secondClass, reservationCompulsory,
-                        supplementCompulsory, wheelchairAccess, bicycleReservation, anyWeatherCondition, budapestPass);
+                        longDistance, firstClass, secondClass, reservationCompulsory, supplementCompulsory,
+                        wheelchairAccess, bicycleReservation, anyWeatherCondition, budapestPass);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -139,7 +137,6 @@ public class JavaTrainSchedule {
     private static void insertService (
             Connection con,
             int trainId,
-            boolean suburban,
             boolean longDistance,
             boolean firstClass,
             boolean secondClass,
@@ -152,20 +149,19 @@ public class JavaTrainSchedule {
     ) throws SQLException {
 
         PreparedStatement stmt = con.prepareStatement("INSERT INTO service" +
-                " (train_id, suburban, long_distance, first_class, second_class, reservation_compulsory, " +
+                " (train_id, long_distance, first_class, second_class, reservation_compulsory, " +
                 "supplement_compulsory, wheelchair_access, bicycle_reservation, " +
-                "any_weather_condition, budapest_pass) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                "any_weather_condition, budapest_pass) VALUES (?,?,?,?,?,?,?,?,?,?)");
         stmt.setInt(1, trainId);
-        stmt.setBoolean(2, suburban);
-        stmt.setBoolean(3, longDistance);
-        stmt.setBoolean(4, firstClass);
-        stmt.setBoolean(5, secondClass);
-        stmt.setBoolean(6, reservationCompulsory);
-        stmt.setBoolean(7, supplementCompulsory);
-        stmt.setBoolean(8, wheelchairAccess);
-        stmt.setBoolean(9, bicycleReservation);
-        stmt.setBoolean(10, anyWeatherCondition);
-        stmt.setBoolean(11, budapestPass);
+        stmt.setBoolean(2, longDistance);
+        stmt.setBoolean(3, firstClass);
+        stmt.setBoolean(4, secondClass);
+        stmt.setBoolean(5, reservationCompulsory);
+        stmt.setBoolean(6, supplementCompulsory);
+        stmt.setBoolean(7, wheelchairAccess);
+        stmt.setBoolean(8, bicycleReservation);
+        stmt.setBoolean(9, anyWeatherCondition);
+        stmt.setBoolean(10, budapestPass);
         stmt.executeUpdate();
     }
 
