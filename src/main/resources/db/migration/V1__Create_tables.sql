@@ -1,36 +1,53 @@
-CREATE TABLE IF NOT EXISTS train (
-                                        id INTEGER PRIMARY KEY NOT NULL,
-                                        type VARCHAR(20) NOT NULL,
-                                        highest_class SMALLINT
+alter table if exists cargo drop constraint if exists FK274ox1jmt7aa7bryxkn93v14b;
+alter table if exists service drop constraint if exists FK6b6bpw3o2y8w606dhyhfrtl0g;
+alter table if exists stop drop constraint if exists FKtmy8xl2r4b7m5on4kqbahxk26;
+
+drop table if exists cargo cascade;
+drop table if exists service cascade;
+drop table if exists stop cascade;
+drop table if exists train cascade;
+
+create table cargo
+(
+    id       bigserial not null,
+    car_type varchar(255),
+    name     varchar(255),
+    train_id int8,
+    primary key (id)
+);
+create table service
+(
+    id                     bigserial not null,
+    any_weather_condition  boolean,
+    bicycle_reservation    boolean,
+    budapest_pass          boolean,
+    first_class            boolean,
+    long_distance          boolean,
+    reservation_compulsory boolean,
+    second_class           boolean,
+    supplement_compulsory  boolean,
+    wheelchair_access      boolean,
+    train_id               int8,
+    primary key (id)
+);
+create table stop
+(
+    id             bigserial not null,
+    arrival_time   time,
+    departure_time time,
+    distance       int4,
+    name           varchar(255),
+    platform       int4,
+    train_id       int8,
+    primary key (id)
+);
+create table train
+(
+    id   int8 not null,
+    type varchar(255),
+    primary key (id)
 );
 
-CREATE TABLE IF NOT EXISTS stop (
-                                        id SERIAL PRIMARY KEY,
-                                        train_id INTEGER NOT NULL,
-                                        distance INTEGER NOT NULL,
-                                        name VARCHAR(255) NOT NULL,
-                                        arrival_time TIME,
-                                        departure_time TIME,
-                                        platform INTEGER
-);
-
-CREATE TABLE IF NOT EXISTS service (
-                                        id SERIAL PRIMARY KEY,
-                                        train_id INTEGER NOT NULL,
-                                        long_distance BOOLEAN DEFAULT FALSE,
-                                        first_class BOOLEAN DEFAULT FALSE,
-                                        second_class BOOLEAN DEFAULT FALSE,
-                                        reservation_compulsory BOOLEAN DEFAULT FALSE,
-                                        supplement_compulsory BOOLEAN DEFAULT FALSE,
-                                        wheelchair_access BOOLEAN DEFAULT FALSE,
-                                        bicycle_reservation BOOLEAN DEFAULT FALSE,
-                                        any_weather_condition BOOLEAN DEFAULT FALSE,
-                                        budapest_pass BOOLEAN DEFAULT FALSE
-);
-
-CREATE TABLE IF NOT EXISTS cargo (
-                                        id SERIAL PRIMARY KEY,
-                                        train_id INTEGER NOT NULL,
-                                        name VARCHAR(30) NOT NULL,
-                                        car_type VARCHAR(30) NOT NULL
-);
+alter table if exists cargo add constraint FK274ox1jmt7aa7bryxkn93v14b foreign key (train_id) references train;
+alter table if exists service add constraint FK6b6bpw3o2y8w606dhyhfrtl0g foreign key (train_id) references train;
+alter table if exists stop add constraint FKtmy8xl2r4b7m5on4kqbahxk26 foreign key (train_id) references train;

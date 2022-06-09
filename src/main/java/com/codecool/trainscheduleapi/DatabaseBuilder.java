@@ -21,7 +21,7 @@ public class DatabaseBuilder {
         buildDatabase();
     }
 
-    public static void buildDatabase() {
+    private static void buildDatabase() {
         Connection con = new ConnectionUtility().getConnection();
         generateTrains(con);
         generateStops(con);
@@ -37,25 +37,23 @@ public class DatabaseBuilder {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String type = rs.getString("type");
-                int highestClass = rs.getInt("highest_class");
 
-                insertTrain(con, (id % 2 == 0 ? id + 2 : id - 2), type, highestClass);
-                insertTrain(con, (id % 2 == 0 ? id + 4 : id - 4), type, highestClass);
-                insertTrain(con, FREIGHT_TRAIN_START + id, "Freight", 0);
-                insertTrain(con, (id % 2 == 0 ? FREIGHT_TRAIN_START + id + 2 : FREIGHT_TRAIN_START + id - 2), "Freight", 0);
-                insertTrain(con, (id % 2 == 0 ? FREIGHT_TRAIN_START + id + 4 : FREIGHT_TRAIN_START + id - 4), "Freight", 0);
+                insertTrain(con, (id % 2 == 0 ? id + 2 : id - 2), type);
+                insertTrain(con, (id % 2 == 0 ? id + 4 : id - 4), type);
+                insertTrain(con, FREIGHT_TRAIN_START + id, "Freight");
+                insertTrain(con, (id % 2 == 0 ? FREIGHT_TRAIN_START + id + 2 : FREIGHT_TRAIN_START + id - 2), "Freight");
+                insertTrain(con, (id % 2 == 0 ? FREIGHT_TRAIN_START + id + 4 : FREIGHT_TRAIN_START + id - 4), "Freight");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void insertTrain(Connection con, int id, String type, int highestClass) throws SQLException {
+    private static void insertTrain(Connection con, int id, String type) throws SQLException {
         PreparedStatement stmt = con.prepareStatement("INSERT INTO train" +
-                " (id,type,highest_class) VALUES (?,?,?)");
+                " (id,type) VALUES (?,?)");
         stmt.setInt(1, id);
         stmt.setString(2, type);
-        stmt.setInt(3, highestClass);
         stmt.executeUpdate();
     }
 

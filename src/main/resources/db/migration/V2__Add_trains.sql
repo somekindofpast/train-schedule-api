@@ -2,122 +2,122 @@
 
 --Győr
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (949,   'InterCity',    1),
-    (922,   'InterCity',    1),
-    (39510, 'Passenger',    2),
-    (9605,  'InterRegio',   2);
+    (949,   'InterCity'),
+    (922,   'InterCity'),
+    (39510, 'Passenger'),
+    (9605,  'InterRegio');
     
 --Tatabánya
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (912,  'InterCity',   1);
+    (912,  'InterCity');
     
 --Szombathely
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (925,   'InterCity',    2),
-    (919,   'InterCity',    1),
-    (9019,  'Passenger',    2),
-    (9826,  'Passenger',    2),
-    (909,   'InterCity',    2),
-    (8900,  'InterRegio',   2);
+    (925,   'InterCity'),
+    (919,   'InterCity'),
+    (9019,  'Passenger'),
+    (9826,  'Passenger'),
+    (909,   'InterCity'),
+    (8900,  'InterRegio');
     
 --Zalaegerszeg
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (9819,  'Passenger',   2),
-    (959,   'InterCity',   2);
+    (9819,  'Passenger'),
+    (959,   'InterCity');
     
 --Veszprém
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (39519, 'Passenger',   2),
-    (900,   'InterCity',   2),
-    (952,   'InterCity',   2);
+    (39519, 'Passenger'),
+    (900,   'InterCity'),
+    (952,   'InterCity');
     
 --Székesfehérvár
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (8392,   'InterRegio',   2);
+    (8392,   'InterRegio');
     
 --Kaposvár
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (9690,  'InterRegio',   2),
-    (829,   'InterCity',    2);
+    (9690,  'InterRegio'),
+    (829,   'InterCity');
     
 --Szekszárd
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (8309,   'InterRegio',    2);
+    (8309,   'InterRegio');
     
 --Budapest
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (822,   'InterCity',    2),
-    (6110,  'Passenger',    2),
-    (182,   'InterCity',    1),
-    (540,   'InterRegio',   2),
-    (700,   'InterCity',    1),
-    (7400,  'InterCity',    2);
+    (822,   'InterCity'),
+    (6110,  'Passenger'),
+    (182,   'InterCity'),
+    (540,   'InterRegio'),
+    (700,   'InterCity'),
+    (7400,  'InterCity');
     
 --Eger
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (5509,   'InterRegio',    2);
+    (5509,   'InterRegio');
     
 --Miskolc
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (5140,  'Passenger',    2),
-    (582,   'InterCity',    1);
+    (5140,  'Passenger'),
+    (582,   'InterCity');
     
 --Nyíregyháza
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (5119,   'Passenger',    2);
+    (5119,   'Passenger');
     
 --Debrecen
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (682,   'InterCity',    1);
+    (682,   'InterCity');
     
 --Szolnok
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (37117,   'Passenger',    2);
+    (37117,   'Passenger');
     
 --Kecskemét
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (37120,   'Passenger',    2);
+    (37120,   'Passenger');
     
 --Szeged
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (7009,   'Passenger',    2),
-    (7740,   'Passenger',    2);
+    (7009,   'Passenger'),
+    (7740,   'Passenger');
     
 --Békéscsaba
 INSERT INTO
-    train (id, type, highest_class)
+    train (id, type)
 VALUES
-    (7407,   'InterCity',    2),
-    (7749,   'Passenger',    2);
+    (7407,   'InterCity'),
+    (7749,   'Passenger');
