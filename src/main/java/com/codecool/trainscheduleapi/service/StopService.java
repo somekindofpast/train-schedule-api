@@ -24,4 +24,12 @@ public class StopService {
     public Optional<Stop> findById(Long id) {
         return stopRepository.findById(id);
     }
+
+    public List<Stop> findStopsByName(String stopName) {
+        return stopRepository.findStopsByName(stopName);
+    }
+
+    public void deleteById(Long id) {
+        stopRepository.deleteById(id);
+    }
 }

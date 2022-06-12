@@ -24,4 +24,12 @@ public class CargoService {
     public Optional<Cargo> findById(Long id) {
         return cargoRepository.findById(id);
     }
+
+    public List<Cargo> findByName(String name) {
+        return cargoRepository.findCargoByName(name);
+    }
+
+    public void deleteById(Long id) {
+        cargoRepository.deleteById(id);
+    }
 }

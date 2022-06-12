@@ -16,7 +16,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.REMOVE)
     @JsonBackReference
     private Train train;
 

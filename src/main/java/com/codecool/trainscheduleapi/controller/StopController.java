@@ -3,10 +3,7 @@ package com.codecool.trainscheduleapi.controller;
 import com.codecool.trainscheduleapi.entity.Stop;
 import com.codecool.trainscheduleapi.service.StopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +26,13 @@ public class StopController {
     @GetMapping("/{id}")
     public Optional<Stop> findById(@PathVariable("id") Long id) {
         return stopService.findById(id);
+    }
+
+    @GetMapping("/name/{name}")
+    public List<Stop> findByStopName(@PathVariable("name") String name) { return stopService.findStopsByName(name); }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        stopService.deleteById(id);
     }
 }

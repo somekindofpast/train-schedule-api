@@ -17,15 +17,15 @@ public class Train {
     private Long id;
     private String type;
 
-    @OneToMany(mappedBy = "train")
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Stop> stops;
 
-    @OneToOne(mappedBy = "train")
+    @OneToOne(mappedBy = "train", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Service service;
 
-    @OneToMany(mappedBy = "train")
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Cargo> cargos;
 }

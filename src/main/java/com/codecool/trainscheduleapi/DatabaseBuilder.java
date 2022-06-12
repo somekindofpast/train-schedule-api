@@ -62,6 +62,8 @@ public class DatabaseBuilder {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("select * from stop");
 
+            long milliSecondDelay = 1000L * 60L * 60L;
+
             while (rs.next()) {
                 int trainId = rs.getInt("train_id");
                 int distance = rs.getInt("distance");
@@ -70,11 +72,23 @@ public class DatabaseBuilder {
                 Time departureTime = rs.getTime("departure_time");
                 int platform = rs.getInt("platform");
 
-                insertStop(con, (trainId % 2 == 0 ? trainId + 2 : trainId - 2), distance, name, arrivalTime, departureTime, platform);
-                insertStop(con, (trainId % 2 == 0 ? trainId + 4 : trainId - 4), distance, name, arrivalTime, departureTime, platform);
+                insertStop(con, (trainId % 2 == 0 ? trainId + 2 : trainId - 2),
+                        distance, name, (arrivalTime == null ? null : new Time(arrivalTime.getTime() + milliSecondDelay)),
+                        (departureTime == null ? null : new Time(departureTime.getTime() + milliSecondDelay)), platform);
+
+                insertStop(con, (trainId % 2 == 0 ? trainId + 4 : trainId - 4),
+                        distance, name, (arrivalTime == null ? null : new Time(arrivalTime.getTime() + milliSecondDelay * 2)),
+                        (departureTime == null ? null : new Time(departureTime.getTime() + milliSecondDelay * 2)), platform);
+
                 insertStop(con, FREIGHT_TRAIN_START + trainId, distance, name, arrivalTime, departureTime, platform);
-                insertStop(con, (trainId % 2 == 0 ? FREIGHT_TRAIN_START + trainId + 2 : FREIGHT_TRAIN_START + trainId - 2), distance, name, arrivalTime, departureTime, platform);
-                insertStop(con, (trainId % 2 == 0 ? FREIGHT_TRAIN_START + trainId + 4 : FREIGHT_TRAIN_START + trainId - 4), distance, name, arrivalTime, departureTime, platform);
+
+                insertStop(con, (trainId % 2 == 0 ? FREIGHT_TRAIN_START + trainId + 2 : FREIGHT_TRAIN_START + trainId - 2),
+                        distance, name, (arrivalTime == null ? null : new Time(arrivalTime.getTime() + milliSecondDelay)),
+                        (departureTime == null ? null : new Time(departureTime.getTime() + milliSecondDelay)), platform);
+
+                insertStop(con, (trainId % 2 == 0 ? FREIGHT_TRAIN_START + trainId + 4 : FREIGHT_TRAIN_START + trainId - 4),
+                        distance, name, (arrivalTime == null ? null : new Time(arrivalTime.getTime() + milliSecondDelay * 2)),
+                        (departureTime == null ? null : new Time(departureTime.getTime() + milliSecondDelay * 2)), platform);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

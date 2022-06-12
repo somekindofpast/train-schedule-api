@@ -23,4 +23,8 @@ public class ServiceService {
     public Optional<com.codecool.trainscheduleapi.entity.Service> findById(Long id) {
         return serviceRepository.findById(id);
     }
+
+    public void deleteById(Long id) {
+        serviceRepository.deleteById(id);
+    }
 }
