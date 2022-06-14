@@ -1,5 +1,9 @@
 package com.codecool.trainscheduleapi.controller;
 
+import com.codecool.trainscheduleapi.DTO.TrainCargoDTO;
+import com.codecool.trainscheduleapi.DTO.TrainDTO;
+import com.codecool.trainscheduleapi.DTO.TrainServiceDTO;
+import com.codecool.trainscheduleapi.DTO.TrainStopDTO;
 import com.codecool.trainscheduleapi.entity.Train;
 import com.codecool.trainscheduleapi.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +36,31 @@ public class TrainController {
     @GetMapping("/freight/{cargo_name}")
     public Set<Train> findFreightTrainsByCargoName(@PathVariable("cargo_name") String cargoName) {
         return trainService.findFreightTrainsByCargoName(cargoName);
+    }
+
+    @PostMapping
+    public Train save(@RequestBody TrainDTO trainDTO) {
+        return trainService.save(trainDTO);
+    }
+
+    @PostMapping("/addStop")
+    public Train saveAddStop(@RequestBody TrainStopDTO trainStopDTO) {
+        return trainService.saveAddStop(trainStopDTO);
+    }
+
+    @PostMapping("/addService")
+    public Train saveAddService(@RequestBody TrainServiceDTO trainServiceDTO) {
+        return trainService.saveAddService(trainServiceDTO);
+    }
+
+    @PostMapping("/addCargo")
+    public Train saveAddCargo(@RequestBody TrainCargoDTO trainCargoDTO) {
+        return trainService.saveAddCargo(trainCargoDTO);
+    }
+
+    @PutMapping("/{id}/type/{type}")
+    public Train update(@PathVariable("id") Long id, @PathVariable("type") String type) {
+        return trainService.update(id, type);
     }
 
     @DeleteMapping("/{id}")
