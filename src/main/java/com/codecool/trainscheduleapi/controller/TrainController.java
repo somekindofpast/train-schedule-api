@@ -7,8 +7,12 @@ import com.codecool.trainscheduleapi.DTO.TrainStopDTO;
 import com.codecool.trainscheduleapi.entity.Train;
 import com.codecool.trainscheduleapi.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -39,8 +43,12 @@ public class TrainController {
     }
 
     @PostMapping
-    public Train save(@RequestBody TrainDTO trainDTO) {
-        return trainService.save(trainDTO);
+    public ResponseEntity<?> save(@RequestBody @Valid TrainDTO trainDTO, BindingResult errors) {
+        if(errors.hasErrors())
+            return ResponseEntity.badRequest().body("train type is incorrect");
+        else
+            return ResponseEntity.ok().body(trainService.save(trainDTO));
+        //return trainService.save(trainDTO);
     }
 
     @PostMapping("/addStop")
