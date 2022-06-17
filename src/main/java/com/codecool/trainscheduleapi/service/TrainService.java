@@ -1,9 +1,6 @@
 package com.codecool.trainscheduleapi.service;
 
-import com.codecool.trainscheduleapi.DTO.TrainCargoDTO;
-import com.codecool.trainscheduleapi.DTO.TrainDTO;
-import com.codecool.trainscheduleapi.DTO.TrainServiceDTO;
-import com.codecool.trainscheduleapi.DTO.TrainStopDTO;
+import com.codecool.trainscheduleapi.DTO.*;
 import com.codecool.trainscheduleapi.entity.Cargo;
 import com.codecool.trainscheduleapi.entity.Stop;
 import com.codecool.trainscheduleapi.entity.Train;
@@ -12,6 +9,7 @@ import com.codecool.trainscheduleapi.repository.ServiceRepository;
 import com.codecool.trainscheduleapi.repository.StopRepository;
 import com.codecool.trainscheduleapi.repository.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -31,65 +29,100 @@ public class TrainService {
         this.cargoRepository = cargoRepository;
     }
 
-    public List<Train> findAll() {
-        return trainRepository.findAll();
+    public List<TrainDTO> findAll() {
+        List<Train> trains = trainRepository.findAll();
+        List<TrainDTO> trainDTOList = new ArrayList<>();
+        for (Train train : trains) {
+            trainDTOList.add(new TrainDTO(train));
+        }
+        return trainDTOList;
     }
 
     public Optional<Train> findById(Long id) {
         return trainRepository.findById(id);
     }
 
-    public Set<Train> findFreightTrainsByCargoName(String cargoName) {
+    public Set<TrainDTO> findFreightTrainsByCargoName(String cargoName) {
         List<Cargo> cargoList = cargoRepository.findCargoByName(cargoName);
-        Set<Train> trains = new HashSet<>();
+        Set<TrainDTO> trainDTOList = new HashSet<>();
         for (Cargo cargo : cargoList) {
-            trains.add(cargo.getTrain());
+            trainDTOList.add(new TrainDTO(cargo.getTrain()));
         }
-        return trains;
+        return trainDTOList;
     }
 
-    public Train save(TrainDTO trainDTO) {
+    public TrainDTO save(TrainSelectionDTO trainSelectionDTO) {
         Train newTrain = new Train();
-        newTrain.setId(trainDTO.getId());
-        newTrain.setType(trainDTO.getType());
+        newTrain.setId(trainSelectionDTO.getId());
+        newTrain.setType(trainSelectionDTO.getType());
         newTrain.setStops(new ArrayList<>());
         newTrain.setCargos(new ArrayList<>());
 
-        return trainRepository.save(newTrain);
+        return new TrainDTO(trainRepository.save(newTrain));
     }
 
-    public Train saveAddStop(TrainStopDTO trainStopDTO) {
-        Train train = findById(trainStopDTO.getTrainId()).orElseThrow();
-        Stop stop = stopRepository.findById(trainStopDTO.getStopId()).orElseThrow();
-        train.getStops().add(stop);
+    public ResponseEntity<?> saveAddStop(TrainStopDTO trainStopDTO) {
+        Optional<Train> train = findById(trainStopDTO.getTrainId());
+        if(train.isEmpty())
+            return ResponseEntity.badRequest().body("train id not found");
 
-        return trainRepository.save(train);
+        Optional<Stop> stop = stopRepository.findById(trainStopDTO.getStopId());
+        if(stop.isEmpty())
+            return ResponseEntity.badRequest().body("stop id not found");
+
+        stop.get().setTrain(train.get());
+        return ResponseEntity.ok().body(new StopDTO(stopRepository.save(stop.get())));
     }
 
-    public Train saveAddService(TrainServiceDTO trainServiceDTO) {
-        Train train = findById(trainServiceDTO.getTrainId()).orElseThrow();
-        com.codecool.trainscheduleapi.entity.Service service = serviceRepository.findById(trainServiceDTO.getServiceId()).orElseThrow();
-        train.setService(service);
+    public ResponseEntity<?> saveAddService(TrainServiceDTO trainServiceDTO) {
+        Optional<Train> train = findById(trainServiceDTO.getTrainId());
+        if(train.isEmpty())
+            return ResponseEntity.badRequest().body("train id not found");
 
-        return trainRepository.save(train);
+        Optional<com.codecool.trainscheduleapi.entity.Service> service = serviceRepository.findById(trainServiceDTO.getServiceId());
+        if(service.isEmpty())
+            return ResponseEntity.badRequest().body("service id not found");
+
+        service.get().setTrain(train.get());
+        return ResponseEntity.ok().body(new ServiceDTO(serviceRepository.save(service.get())));
     }
 
-    public Train saveAddCargo(TrainCargoDTO trainCargoDTO) {
-        Train train = findById(trainCargoDTO.getTrainId()).orElseThrow();
-        Cargo cargo = cargoRepository.findById(trainCargoDTO.getCargoId()).orElseThrow();
-        train.getCargos().add(cargo);
+    public ResponseEntity<?> saveAddCargo(TrainCargoDTO trainCargoDTO) {
+        Optional<Train> train = findById(trainCargoDTO.getTrainId());
+        if(train.isEmpty())
+            return ResponseEntity.badRequest().body("train id not found");
 
-        return trainRepository.save(train);
+        Optional<Cargo> cargo = cargoRepository.findById(trainCargoDTO.getCargoId());
+        if(cargo.isEmpty())
+            return ResponseEntity.badRequest().body("cargo id not found");
+
+        cargo.get().setTrain(train.get());
+        return ResponseEntity.ok().body(new CargoDTO(cargoRepository.save(cargo.get())));
     }
 
-    public Train update(Long id, String type) {
-        Train train = findById(id).orElseThrow();
-        train.setType(type);
+    public ResponseEntity<?> update(Long id, String type) {
+        Optional<Train> train = findById(id);
+        if(train.isEmpty())
+            return ResponseEntity.badRequest().body("train id not found");
 
-        return trainRepository.save(train);
+        if(type == null || type.length() < 3)
+            return ResponseEntity.badRequest().body("train type is incorrect");
+
+        train.get().setType(type);
+
+        return ResponseEntity.ok().body(new TrainDTO(trainRepository.save(train.get())));
     }
 
-    public void deleteById(Long id) {
-        trainRepository.deleteById(id);
+    public ResponseEntity<?> deleteById(Long id) {
+        try {
+            Train train = findById(id).orElseThrow();
+            train.getStops().forEach(stop -> stop.setTrain(null));
+            train.getService().setTrain(null);
+            train.getCargos().forEach(cargo -> cargo.setTrain(null));
+            trainRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("train id not found");
+        }
     }
 }

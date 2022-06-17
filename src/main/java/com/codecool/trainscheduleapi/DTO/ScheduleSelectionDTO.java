@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SelectionDTO {
+public class ScheduleSelectionDTO {
     private String departureLocation;
     private String arrivalLocation;
 }

@@ -1,7 +1,7 @@
 package com.codecool.trainscheduleapi.controller;
 
 import com.codecool.trainscheduleapi.DTO.ScheduleDTO;
-import com.codecool.trainscheduleapi.DTO.SelectionDTO;
+import com.codecool.trainscheduleapi.DTO.ScheduleSelectionDTO;
 import com.codecool.trainscheduleapi.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +22,12 @@ public class ScheduleController {
     }
 
     @GetMapping("/passenger")
-    public List<ScheduleDTO> getPassengerTrainSchedule(@RequestBody SelectionDTO selectionDTO) {
-        return scheduleService.listTrainSchedule(selectionDTO, false);
+    public List<ScheduleDTO> getPassengerTrainSchedule(@RequestBody ScheduleSelectionDTO scheduleSelectionDTO) {
+        return scheduleService.listTrainSchedule(scheduleSelectionDTO, false);
     }
 
     @GetMapping("/freight")
-    public List<ScheduleDTO> getFreightTrainSchedule(@RequestBody SelectionDTO selectionDTO) {
-        return scheduleService.listTrainSchedule(selectionDTO, true);
+    public List<ScheduleDTO> getFreightTrainSchedule(@RequestBody ScheduleSelectionDTO scheduleSelectionDTO) {
+        return scheduleService.listTrainSchedule(scheduleSelectionDTO, true);
     }
 }

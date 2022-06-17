@@ -1,6 +1,5 @@
 package com.codecool.trainscheduleapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,15 +16,12 @@ public class Train {
     private Long id;
     private String type;
 
-    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "train")
     private List<Stop> stops;
 
-    @OneToOne(mappedBy = "train", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToOne(mappedBy = "train")
     private Service service;
 
-    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "train")
     private List<Cargo> cargos;
 }

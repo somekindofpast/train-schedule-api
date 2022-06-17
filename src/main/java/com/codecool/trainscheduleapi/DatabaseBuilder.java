@@ -215,13 +215,13 @@ public class DatabaseBuilder {
                 "boxcar", "hopper car", "flatcar", "tank car", "gondola", "coil car", "refrigerator car", "specialty car"
         ));
 
-        cargo.add(new ArrayList<String>(Arrays.asList("consumer packaged goods", "auto parts", "paper reams", "canned goods", "bagged products")));
-        cargo.add(new ArrayList<String>(Arrays.asList("coal", "ore", "salt", "sand", "grain & wheat", "corn", "sugar", "fertilizer")));
-        cargo.add(new ArrayList<String>(Arrays.asList("poles & pipes", "logs & cut lumber", "steel plates & beams", "wind turbines", "machinery & equipment", "intermodal containers")));
-        cargo.add(new ArrayList<String>(Arrays.asList("oil", "water", "chemicals", "petroleum-based products", "liquid hydrogen")));
-        cargo.add(new ArrayList<String>(Arrays.asList("scrap metal", "steel plates & coils", "rail track & ties", "gravel", "construction debris", "miscellaneous waste")));
-        cargo.add(new ArrayList<String>(Arrays.asList("steel coils", "copper coils", "plastic tubing")));
-        cargo.add(new ArrayList<String>(Arrays.asList("frozen meat & fish", "fresh produce", "milk", "beer", "ice")));
-        cargo.add(new ArrayList<String>(Arrays.asList("automotive vehicles", "ballast", "aggregate", "miscellaneous items")));
+        cargo.add(new ArrayList<>(Arrays.asList("consumer packaged goods", "auto parts", "paper reams", "canned goods", "bagged products")));
+        cargo.add(new ArrayList<>(Arrays.asList("coal", "ore", "salt", "sand", "grain & wheat", "corn", "sugar", "fertilizer")));
+        cargo.add(new ArrayList<>(Arrays.asList("poles & pipes", "logs & cut lumber", "steel plates & beams", "wind turbines", "machinery & equipment", "intermodal containers")));
+        cargo.add(new ArrayList<>(Arrays.asList("oil", "water", "chemicals", "petroleum-based products", "liquid hydrogen")));
+        cargo.add(new ArrayList<>(Arrays.asList("scrap metal", "steel plates & coils", "rail track & ties", "gravel", "construction debris", "miscellaneous waste")));
+        cargo.add(new ArrayList<>(Arrays.asList("steel coils", "copper coils", "plastic tubing")));
+        cargo.add(new ArrayList<>(Arrays.asList("frozen meat & fish", "fresh produce", "milk", "beer", "ice")));
+        cargo.add(new ArrayList<>(Arrays.asList("automotive vehicles", "ballast", "aggregate", "miscellaneous items")));
     }
 }

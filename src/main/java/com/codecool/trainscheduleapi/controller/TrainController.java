@@ -1,21 +1,16 @@
 package com.codecool.trainscheduleapi.controller;
 
-import com.codecool.trainscheduleapi.DTO.TrainCargoDTO;
-import com.codecool.trainscheduleapi.DTO.TrainDTO;
-import com.codecool.trainscheduleapi.DTO.TrainServiceDTO;
-import com.codecool.trainscheduleapi.DTO.TrainStopDTO;
+import com.codecool.trainscheduleapi.DTO.*;
 import com.codecool.trainscheduleapi.entity.Train;
 import com.codecool.trainscheduleapi.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/train")
@@ -28,51 +23,68 @@ public class TrainController {
     }
 
     @GetMapping
-    public List<Train> findAll() {
+    public List<TrainDTO> findAll() {
         return trainService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Train> findById(@PathVariable("id") Long id) {
-        return trainService.findById(id);
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+        Optional<Train> train = trainService.findById(id);
+
+        if(train.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(new TrainDTO(train.get()));
+        }
     }
 
     @GetMapping("/freight/{cargo_name}")
-    public Set<Train> findFreightTrainsByCargoName(@PathVariable("cargo_name") String cargoName) {
-        return trainService.findFreightTrainsByCargoName(cargoName);
+    public ResponseEntity<?> findFreightTrainsByCargoName(@PathVariable("cargo_name") String cargoName) {
+        if(cargoName == null || cargoName.length() < 3)
+            return ResponseEntity.badRequest().body("cargo name must be at least 3 characters");
+
+        return ResponseEntity.ok().body(trainService.findFreightTrainsByCargoName(cargoName));
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody @Valid TrainDTO trainDTO, BindingResult errors) {
+    public ResponseEntity<?> save(@RequestBody @Valid TrainSelectionDTO trainSelectionDTO, BindingResult errors) {
         if(errors.hasErrors())
-            return ResponseEntity.badRequest().body("train type is incorrect");
-        else
-            return ResponseEntity.ok().body(trainService.save(trainDTO));
-        //return trainService.save(trainDTO);
+            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+
+        return ResponseEntity.ok().body(trainService.save(trainSelectionDTO));
     }
 
     @PostMapping("/addStop")
-    public Train saveAddStop(@RequestBody TrainStopDTO trainStopDTO) {
+    public ResponseEntity<?> saveAddStop(@RequestBody @Valid TrainStopDTO trainStopDTO, BindingResult errors) {
+        if(errors.hasErrors())
+            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+
         return trainService.saveAddStop(trainStopDTO);
     }
 
     @PostMapping("/addService")
-    public Train saveAddService(@RequestBody TrainServiceDTO trainServiceDTO) {
+    public ResponseEntity<?> saveAddService(@RequestBody @Valid TrainServiceDTO trainServiceDTO, BindingResult errors) {
+        if(errors.hasErrors())
+            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+
         return trainService.saveAddService(trainServiceDTO);
     }
 
     @PostMapping("/addCargo")
-    public Train saveAddCargo(@RequestBody TrainCargoDTO trainCargoDTO) {
+    public ResponseEntity<?> saveAddCargo(@RequestBody @Valid TrainCargoDTO trainCargoDTO, BindingResult errors) {
+        if(errors.hasErrors())
+            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+
         return trainService.saveAddCargo(trainCargoDTO);
     }
 
     @PutMapping("/{id}/type/{type}")
-    public Train update(@PathVariable("id") Long id, @PathVariable("type") String type) {
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @PathVariable("type") String type) {
         return trainService.update(id, type);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
-        trainService.deleteById(id);
+    public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
+        return trainService.deleteById(id);
     }
 }

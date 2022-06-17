@@ -1,7 +1,7 @@
 package com.codecool.trainscheduleapi.service;
 
 import com.codecool.trainscheduleapi.DTO.ScheduleDTO;
-import com.codecool.trainscheduleapi.DTO.SelectionDTO;
+import com.codecool.trainscheduleapi.DTO.ScheduleSelectionDTO;
 import com.codecool.trainscheduleapi.entity.Stop;
 import com.codecool.trainscheduleapi.repository.StopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class ScheduleService {
         this.stopRepository = stopRepository;
     }
 
-    public List<ScheduleDTO> listTrainSchedule(SelectionDTO selectionDTO, Boolean freight) {
+    public List<ScheduleDTO> listTrainSchedule(ScheduleSelectionDTO scheduleSelectionDTO, Boolean freight) {
         List<ScheduleDTO> schedule = new ArrayList<>();
-        List<Stop> departures = stopRepository.findStopsByName(selectionDTO.getDepartureLocation());
+        List<Stop> departures = stopRepository.findStopsByName(scheduleSelectionDTO.getDepartureLocation());
         if(departures.isEmpty())
             return schedule;
 
@@ -40,7 +40,7 @@ public class ScheduleService {
                     .collect(Collectors.toList());
 
             Optional<Stop> arrival = stops.stream()
-                    .filter(s -> s.getName().equals(selectionDTO.getArrivalLocation()))
+                    .filter(s -> s.getName().equals(scheduleSelectionDTO.getArrivalLocation()))
                     .findFirst();
 
             if(arrival.isPresent() && departure.getDistance() < arrival.get().getDistance()) {

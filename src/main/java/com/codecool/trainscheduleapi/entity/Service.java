@@ -1,6 +1,5 @@
 package com.codecool.trainscheduleapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +15,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade=CascadeType.REMOVE)
-    @JsonBackReference
+    @OneToOne
     private Train train;
 
     @Column(name = "long_distance")
