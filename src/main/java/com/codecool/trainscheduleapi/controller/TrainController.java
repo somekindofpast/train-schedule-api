@@ -1,6 +1,7 @@
 package com.codecool.trainscheduleapi.controller;
 
 import com.codecool.trainscheduleapi.DTO.*;
+import com.codecool.trainscheduleapi.ValidationUtility;
 import com.codecool.trainscheduleapi.entity.Train;
 import com.codecool.trainscheduleapi.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,40 +41,44 @@ public class TrainController {
 
     @GetMapping("/freight/{cargo_name}")
     public ResponseEntity<?> findFreightTrainsByCargoName(@PathVariable("cargo_name") String cargoName) {
-        if(cargoName == null || cargoName.length() < 3)
-            return ResponseEntity.badRequest().body("cargo name must be at least 3 characters");
+        if(cargoName == null || cargoName.length() < 1 || 200 < cargoName.length())
+            return ResponseEntity.badRequest().body("cargo name must be between 1-200 characters");
 
         return ResponseEntity.ok().body(trainService.findFreightTrainsByCargoName(cargoName));
     }
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody @Valid TrainSelectionDTO trainSelectionDTO, BindingResult errors) {
-        if(errors.hasErrors())
-            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+        if(errors.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(ValidationUtility.getFieldErrorMessages(errors));
+        }
 
         return ResponseEntity.ok().body(trainService.save(trainSelectionDTO));
     }
 
     @PostMapping("/addStop")
     public ResponseEntity<?> saveAddStop(@RequestBody @Valid TrainStopDTO trainStopDTO, BindingResult errors) {
-        if(errors.hasErrors())
-            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+        if(errors.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(ValidationUtility.getFieldErrorMessages(errors));
+        }
 
         return trainService.saveAddStop(trainStopDTO);
     }
 
     @PostMapping("/addService")
     public ResponseEntity<?> saveAddService(@RequestBody @Valid TrainServiceDTO trainServiceDTO, BindingResult errors) {
-        if(errors.hasErrors())
-            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+        if(errors.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(ValidationUtility.getFieldErrorMessages(errors));
+        }
 
         return trainService.saveAddService(trainServiceDTO);
     }
 
     @PostMapping("/addCargo")
     public ResponseEntity<?> saveAddCargo(@RequestBody @Valid TrainCargoDTO trainCargoDTO, BindingResult errors) {
-        if(errors.hasErrors())
-            return ResponseEntity.badRequest().body("one or more JSON field not valid");
+        if(errors.hasFieldErrors()) {
+            return ResponseEntity.badRequest().body(ValidationUtility.getFieldErrorMessages(errors));
+        }
 
         return trainService.saveAddCargo(trainCargoDTO);
     }

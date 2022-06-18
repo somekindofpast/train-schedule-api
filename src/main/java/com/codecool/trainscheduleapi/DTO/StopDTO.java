@@ -5,27 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.sql.Time;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class StopDTO {
-    @NotEmpty
-    private String name;
-    @NotNull
-    @Min(value = 0, message = "distance field must not be negative")
+    private Long id;
+    private Long trainId;
     private Integer distance;
+    private String name;
     private Time arrivalTime;
     private Time departureTime;
     private Integer platform;
 
     public StopDTO(Stop stop) {
-        name = stop.getName();
+        id = stop.getId();
+        if(stop.getTrain() != null)
+            trainId = stop.getTrain().getId();
         distance = stop.getDistance();
+        name = stop.getName();
         arrivalTime = stop.getArrivalTime();
         departureTime = stop.getDepartureTime();
         platform = stop.getPlatform();

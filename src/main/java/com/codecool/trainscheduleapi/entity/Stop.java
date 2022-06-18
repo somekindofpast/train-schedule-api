@@ -1,5 +1,6 @@
 package com.codecool.trainscheduleapi.entity;
 
+import com.codecool.trainscheduleapi.DTO.StopSelectionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,15 @@ public class Stop {
     private Time departureTime;
 
     private Integer platform;
+
+    public void setStopSelectionDTO(StopSelectionDTO stopSelectionDTO) {
+        if(stopSelectionDTO == null)
+            return;
+
+        this.setDistance(stopSelectionDTO.getDistance());
+        this.setName(stopSelectionDTO.getName());
+        this.setArrivalTime(stopSelectionDTO.getArrivalTime());
+        this.setDepartureTime(stopSelectionDTO.getDepartureTime());
+        this.setPlatform(stopSelectionDTO.getPlatform());
+    }
 }

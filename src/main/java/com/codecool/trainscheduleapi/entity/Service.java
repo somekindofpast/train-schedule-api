@@ -1,5 +1,6 @@
 package com.codecool.trainscheduleapi.entity;
 
+import com.codecool.trainscheduleapi.DTO.ServiceSelectionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,4 +45,19 @@ public class Service {
 
     @Column(name = "budapest_pass")
     private Boolean budapestPass;
+
+    public void setServiceSelectionDTO(ServiceSelectionDTO serviceSelectionDTO) {
+        if(serviceSelectionDTO == null)
+            return;
+
+        this.setLongDistance(serviceSelectionDTO.getLongDistance());
+        this.setFirstClass(serviceSelectionDTO.getFirstClass());
+        this.setSecondClass(serviceSelectionDTO.getSecondClass());
+        this.setReservationCompulsory(serviceSelectionDTO.getReservationCompulsory());
+        this.setSupplementCompulsory(serviceSelectionDTO.getSupplementCompulsory());
+        this.setWheelchairAccess(serviceSelectionDTO.getWheelchairAccess());
+        this.setBicycleReservation(serviceSelectionDTO.getBicycleReservation());
+        this.setAnyWeatherCondition(serviceSelectionDTO.getAnyWeatherCondition());
+        this.setBudapestPass(serviceSelectionDTO.getBudapestPass());
+    }
 }

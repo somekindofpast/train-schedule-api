@@ -1,11 +1,16 @@
 package com.codecool.trainscheduleapi.service;
 
+import com.codecool.trainscheduleapi.DTO.StopDTO;
+import com.codecool.trainscheduleapi.DTO.StopSelectionDTO;
 import com.codecool.trainscheduleapi.entity.Stop;
 import com.codecool.trainscheduleapi.repository.StopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -17,19 +22,54 @@ public class StopService {
         this.stopRepository = stopRepository;
     }
 
-    public List<Stop> findAll() {
-        return stopRepository.findAll();
+    public List<StopDTO> findAll() {
+        return convertToStopDTOList(stopRepository.findAll());
     }
 
     public Optional<Stop> findById(Long id) {
         return stopRepository.findById(id);
     }
 
-    public List<Stop> findStopsByName(String stopName) {
-        return stopRepository.findStopsByName(stopName);
+    public List<StopDTO> findStopsByName(String stopName) {
+        return convertToStopDTOList(stopRepository.findStopsByName(stopName));
     }
 
-    public void deleteById(Long id) {
-        stopRepository.deleteById(id);
+    public StopDTO save(StopSelectionDTO stopSelectionDTO) {
+        Stop stop = new Stop();
+        stop.setStopSelectionDTO(stopSelectionDTO);
+        return new StopDTO(stopRepository.save(stop));
+    }
+
+    public ResponseEntity<?> update(StopSelectionDTO stopSelectionDTO, Long id) {
+        Stop stop;
+        try {
+            stop = findById(id).orElseThrow();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest().body("stop id not found");
+        }
+
+        stop.setStopSelectionDTO(stopSelectionDTO);
+        return ResponseEntity.ok().body(new StopDTO(stopRepository.save(stop)));
+    }
+
+    public ResponseEntity<?> deleteById(Long id) {
+        Stop stop;
+        try {
+            stop = findById(id).orElseThrow();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest().body("stop id not found");
+        }
+
+        stop.setTrain(null);
+        stopRepository.delete(stop);
+        return ResponseEntity.ok().build();
+    }
+
+    private List<StopDTO> convertToStopDTOList(List<Stop> stops) {
+        List<StopDTO> stopDTOList = new ArrayList<>();
+        for (Stop stop : stops) {
+            stopDTOList.add(new StopDTO(stop));
+        }
+        return stopDTOList;
     }
 }

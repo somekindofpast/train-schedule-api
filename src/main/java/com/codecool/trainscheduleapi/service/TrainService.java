@@ -101,28 +101,33 @@ public class TrainService {
     }
 
     public ResponseEntity<?> update(Long id, String type) {
-        Optional<Train> train = findById(id);
-        if(train.isEmpty())
+        Train train;
+        try {
+            train = findById(id).orElseThrow();
+        } catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().body("train id not found");
+        }
 
         if(type == null || type.length() < 3)
             return ResponseEntity.badRequest().body("train type is incorrect");
 
-        train.get().setType(type);
+        train.setType(type);
 
-        return ResponseEntity.ok().body(new TrainDTO(trainRepository.save(train.get())));
+        return ResponseEntity.ok().body(new TrainDTO(trainRepository.save(train)));
     }
 
     public ResponseEntity<?> deleteById(Long id) {
+        Train train;
         try {
-            Train train = findById(id).orElseThrow();
-            train.getStops().forEach(stop -> stop.setTrain(null));
-            train.getService().setTrain(null);
-            train.getCargos().forEach(cargo -> cargo.setTrain(null));
-            trainRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
+            train = findById(id).orElseThrow();
+        } catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().body("train id not found");
         }
+
+        train.getStops().forEach(stop -> stop.setTrain(null));
+        train.getService().setTrain(null);
+        train.getCargos().forEach(cargo -> cargo.setTrain(null));
+        trainRepository.delete(train);
+        return ResponseEntity.ok().build();
     }
 }

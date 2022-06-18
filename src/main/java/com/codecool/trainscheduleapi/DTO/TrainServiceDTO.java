@@ -12,9 +12,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class TrainServiceDTO {
     @NotNull
-    @Min(value = 0, message = "id field must not be negative")
+    @Min(value = 0, message = "train id must not be negative")
     private Long trainId;
     @NotNull
-    @Min(value = 0, message = "id field must not be negative")
+    @Min(value = 0, message = "service id must not be negative")
     private Long serviceId;
 }
