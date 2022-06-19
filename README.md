@@ -1,63 +1,30 @@
 # train-schedule-api
 
-A feladatod egy backend API projekt készítése.
 
-Követelmények  
-Maven vagy Gradle projekt  
-Spring Boot alkalmazás  
-SQL backend (pl. MySQL, MariaDB, etc...)  
-Flyway sémamigráció, SQL táblalétrehozás, adatbetöltés  
-REST API, Swagger, OpenAPI dokumentációval  
-Hibakezelés  
-Spring Data JPA repository  
-Integrációs tesztek  
+Ennek a REST API-nak a célja vonatok és vonat menetrendek kilistázása a felhasználó számára.
 
-Feladat nagysága  
-Legalább két 1-n kapcsolatban lévő tábla  
-Legalább két SQL migráció  
-Legalább két entitás  
-Legalább két service  
-Legalább két controller  
-Minden bemenő paraméter validálása  
-Legalább egy property beolvasása  
-Minden HTTP metódusra legalább egy végpont (GET, POST, PUT, DELETE)  
-Legalább 60%-os tesztlefedettség, amely tartalmaz egység és integrációs teszteket is  
-Egy Dockerfile  
-Feladat dokumentáció(README), futtatási parancsok  
+A program hátterében egy PostgreSQL adatbázis fut, mely négy táblával rendelkezik:  
+-Train (a fő tábla, mely kapcsolódik a többi táblához és tartalmazza a vonat típusát)  
+-Stop (N:1 kapcsolat a Train-nel, állomás név, érkezés/távozás ideje, indulás óta megtett táv, platform szám)  
+-Service (1:1 kapcsolat a Train-nel, személyvonatokhoz tartozó adatok, például első/másodosztály, helyjegyköteles, stb)  
+-Cargo (N:1 kapcsolat a Train-nel, tehervonatokhoz tartozó szerelvények típusai és a rakományok nevei)  
 
 
-Vizsgaremek témaötletek  
-oltópont,  
-webshop,  
-idősek otthona (gyógyszerek, ételek, időpontok),  
-vállalatirányítási rendszer (számlák, rendelések),  
-munkaidő-nyilvántartó rendszer,  
-munkaerő-nyilvántartó rendszer,  
-kutatások nyilvántartása,  
-flottakezelő rendszer,  
-autókereskedés,  
-filmes adatbázis,  
-állatkereskedés,  
-menhelyi nyilvántartó,  
-eszközleltár,  
-biztosítási rendszer (szerződések, káresemény, biztosítási összeg, biztosítás fajtája),  
-foglalási rendszer,  
-utazási iroda,  
-építőipari projekt rendszere,  
-könyvtári nyilvántartó,  
-egyéni költségeket nyilvántartó rendszer,  
-valutaváltó,  
-vonatjegy applikáció,  
-ételrendelő applikáció,  
-szolgáltatásrendelő (fodrászat, időpontkezelés, szolgáltatások),  
-mesterember app (kit, mikor lehet hívni),  
-tanulónyilvántartó rendszer (NEPTUN),  
-kedvezményes kuponokat gyűjtő app (milyen termék, milyen kedvezmény),  
-ticketing (hibabejelentő rendszer),  
-online kurzusok (e-learning menedzsment rendszer, LMS),  
-telefonflotta nyilvántartása,  
-elektromos művek ügyfélnyilvántartója,  
-nyelvtanár-nyilvántartó,  
-ételkiszállítás/ételfutár app (Teletál, Netpincér),  
-konferencia-nyilvántartó,  
-receptgyűjtemény.
+DatabaseBuilder:  
+Első indításkor szükséges az adatbázis alaphelyzetbe állítása. Ehhez futtassuk le a   
+DatabaseBuilder alkalmazást, mely a FlyWay migrációs eszköz segítségével törli, majd létrehozza  
+az adattáblákat, és feltölti őket alapértékekkel. Ezután az alkalmazás a meglévő adatok alapján generál még  
+párat, hogy nagyobb legyen az adatbázis.
+
+TrainScheduleApiApplication:  
+Az alkalmazás elindításakor feláll a Spring Boot környezet és kapcsolódik az adatbázishoz.  
+Ezekután böngésző vagy API kliens segítségével (pl Postman) lekérdezéseket küldhetünk az API-nak.  
+Az endpointok megtekinthetők a Swagger UI elindításával. (http://localhost:8080/swagger-ui.html)
+
+Fő endpointok:  
+GET: /schedule/passenger - az induló és érkező településneveket megadva visszakapunk egy menetrend listát  
+azokról a személyvonatokról melyek áthaladnak ezeken a településeken, indulási idejük szerint sorrenbe rakva.  
+Kikalkulálódik emellett a megteendő út hossza és az utazás ideje.  
+GET: /schedule/freight - ugyanez tehervonatokkal  
+GET: /train/freight/{cargo_name} - a rakomány nevét megadva kilistázásra az összes tehervonat mely szállít  
+ilyen rakományt.

@@ -125,7 +125,8 @@ public class TrainService {
         }
 
         train.getStops().forEach(stop -> stop.setTrain(null));
-        train.getService().setTrain(null);
+        if(train.getService() != null)
+            train.getService().setTrain(null);
         train.getCargos().forEach(cargo -> cargo.setTrain(null));
         trainRepository.delete(train);
         return ResponseEntity.ok().build();

@@ -1,6 +1,6 @@
 package com.codecool.trainscheduleapi.DTO;
 
-import com.codecool.trainscheduleapi.entity.Train;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +20,6 @@ public class ScheduleDTO {
     private String travelTime;
     private Integer travelDistance;
 
-    private Train train;
+    @JsonProperty("train")
+    private TrainDTO trainDTO;
 }

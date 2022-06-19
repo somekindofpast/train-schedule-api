@@ -2,8 +2,12 @@ package com.codecool.trainscheduleapi.service;
 
 import com.codecool.trainscheduleapi.DTO.ScheduleDTO;
 import com.codecool.trainscheduleapi.DTO.ScheduleSelectionDTO;
+import com.codecool.trainscheduleapi.DTO.StopDTO;
+import com.codecool.trainscheduleapi.DTO.TrainDTO;
 import com.codecool.trainscheduleapi.entity.Stop;
+import com.codecool.trainscheduleapi.entity.Train;
 import com.codecool.trainscheduleapi.repository.StopRepository;
+import com.codecool.trainscheduleapi.repository.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,52 +19,46 @@ import java.util.stream.Collectors;
 
 @Service
 public class ScheduleService {
+    private TrainRepository trainRepository;
     private StopRepository stopRepository;
 
     @Autowired
-    public ScheduleService(StopRepository stopRepository) {
+    public ScheduleService(TrainRepository trainRepository, StopRepository stopRepository) {
+        this.trainRepository = trainRepository;
         this.stopRepository = stopRepository;
     }
 
     public List<ScheduleDTO> listTrainSchedule(ScheduleSelectionDTO scheduleSelectionDTO, Boolean freight) {
-        List<ScheduleDTO> schedule = new ArrayList<>();
-        List<Stop> departures = stopRepository.findStopsByName(scheduleSelectionDTO.getDepartureLocation());
-        if(departures.isEmpty())
-            return schedule;
 
-        for (Stop departure : departures) {
-            String trainType = departure.getTrain().getType();
-            if((freight && !trainType.equalsIgnoreCase("freight"))
-                    || (!freight && trainType.equalsIgnoreCase("freight"))) {
+        List<Train> trains =  trainRepository.getTrainsByStops(scheduleSelectionDTO.getDepartureLocation(), scheduleSelectionDTO.getArrivalLocation());
+        List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
+
+        for (Train train : trains) {
+
+            if((freight && !train.getType().equalsIgnoreCase("freight")) || (!freight && train.getType().equalsIgnoreCase("freight"))) {
                 continue;
             }
 
-            List<Stop> stops = departure.getTrain().getStops().stream()
-                    .sorted(Comparator.comparingInt(Stop::getDistance))
-                    .collect(Collectors.toList());
+            Optional<Stop> departure = stopRepository.findStopByNameAndTrainId(scheduleSelectionDTO.getDepartureLocation(), train.getId());
+            Optional<Stop> arrival = stopRepository.findStopByNameAndTrainId(scheduleSelectionDTO.getArrivalLocation(), train.getId());
 
-            Optional<Stop> arrival = stops.stream()
-                    .filter(s -> s.getName().equals(scheduleSelectionDTO.getArrivalLocation()))
-                    .findFirst();
+            if(departure.isEmpty() || arrival.isEmpty() || arrival.get().getDistance() < departure.get().getDistance())
+                continue;
 
-            if(arrival.isPresent() && departure.getDistance() < arrival.get().getDistance()) {
-                ScheduleDTO scheduleDTO = new ScheduleDTO();
-                scheduleDTO.setDepartureTime(departure.getDepartureTime());
-                scheduleDTO.setDepartureLocation(departure.getName());
+            ScheduleDTO scheduleDTO = new ScheduleDTO();
+            scheduleDTO.setDepartureTime(departure.get().getDepartureTime());
+            scheduleDTO.setDepartureLocation(departure.get().getName());
+            scheduleDTO.setArrivalTime(arrival.get().getArrivalTime());
+            scheduleDTO.setArrivalLocation(arrival.get().getName());
+            scheduleDTO.setTravelTime(MillisecondsToTimeUnits(scheduleDTO.getArrivalTime().getTime() - scheduleDTO.getDepartureTime().getTime()));
+            scheduleDTO.setTravelDistance(arrival.get().getDistance() - departure.get().getDistance());
 
-                scheduleDTO.setArrivalTime(arrival.get().getArrivalTime());
-                scheduleDTO.setArrivalLocation(arrival.get().getName());
-
-                scheduleDTO.setTravelTime(MillisecondsToTimeUnits(arrival.get().getArrivalTime().getTime() - departure.getDepartureTime().getTime()));
-                scheduleDTO.setTravelDistance(arrival.get().getDistance() - departure.getDistance());
-
-                scheduleDTO.setTrain(departure.getTrain());
-                schedule.add(scheduleDTO);
-            }
+            scheduleDTO.setTrainDTO(new TrainDTO(train));
+            scheduleDTOList.add(scheduleDTO);
         }
 
-        return schedule.stream()
-                .sorted(Comparator.comparing(ScheduleDTO :: getDepartureTime)) //.reversed()
+        return scheduleDTOList.stream()
+                .sorted(Comparator.comparing(ScheduleDTO :: getDepartureTime))
                 .collect(Collectors.toList());
     }
 

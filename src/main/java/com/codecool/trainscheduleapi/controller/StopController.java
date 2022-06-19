@@ -40,12 +40,15 @@ public class StopController {
         }
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<?> findStopsByName(@PathVariable("name") String name) {
+    @GetMapping("/name/{name}/train_id/{train_id}")
+    public ResponseEntity<?> findStopByNameAndTrainId(@PathVariable("name") String name, @PathVariable("train_id") Long trainId) {
         if(name == null || name.length() < 1 || 200 < name.length())
             return ResponseEntity.badRequest().body("stop name must be between 1-200 characters");
 
-        return ResponseEntity.ok().body(stopService.findStopsByName(name));
+        if(trainId == null || trainId < 0)
+            return ResponseEntity.badRequest().body("train id must be a non negative number");
+
+        return stopService.findStopByNameAndTrainId(name, trainId);
     }
 
     @PostMapping

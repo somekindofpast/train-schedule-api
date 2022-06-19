@@ -30,8 +30,13 @@ public class StopService {
         return stopRepository.findById(id);
     }
 
-    public List<StopDTO> findStopsByName(String stopName) {
-        return convertToStopDTOList(stopRepository.findStopsByName(stopName));
+    public ResponseEntity<?> findStopByNameAndTrainId(String stopName, Long trainId) {
+        Optional<Stop> stop = stopRepository.findStopByNameAndTrainId(stopName, trainId);
+
+        if(stop.isEmpty())
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.ok().body(new StopDTO(stop.get()));
     }
 
     public StopDTO save(StopSelectionDTO stopSelectionDTO) {
