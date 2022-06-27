@@ -4,6 +4,7 @@ import com.codecool.trainscheduleapi.DTO.CargoDTO;
 import com.codecool.trainscheduleapi.DTO.CargoSelectionDTO;
 import com.codecool.trainscheduleapi.entity.Cargo;
 import com.codecool.trainscheduleapi.repository.CargoRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -41,29 +42,35 @@ public class CargoService {
         return new CargoDTO(cargoRepository.save(cargo));
     }
 
-    public ResponseEntity<?> update(CargoSelectionDTO cargoSelectionDTO, Long id) {
+    public ResponseEntity<?> update(CargoSelectionDTO cargoSelectionDTO, Long id, Logger logger) {
         Cargo cargo;
         try {
             cargo = findById(id).orElseThrow();
         } catch (NoSuchElementException e) {
-            return ResponseEntity.badRequest().body("cargo id not found");
+            String errorMessage = "Cargo id not found";
+            logger.error("update() for Cargo returned with error 400: Bad request. " + errorMessage);
+            return ResponseEntity.badRequest().body(errorMessage);
         }
 
         cargo.setName(cargoSelectionDTO.getName());
         cargo.setCarType(cargo.getCarType());
+        logger.info("Running update() for Cargo. Record updated.");
         return ResponseEntity.ok().body(new CargoDTO(cargoRepository.save(cargo)));
     }
 
-    public ResponseEntity<?> deleteById(Long id) {
+    public ResponseEntity<?> deleteById(Long id, Logger logger) {
         Cargo cargo;
         try {
             cargo = findById(id).orElseThrow();
         } catch (NoSuchElementException e) {
-            return ResponseEntity.badRequest().body("cargo id not found");
+            String errorMessage = "Cargo id not found";
+            logger.error("deleteById() for Cargo returned with error 400: Bad request. " + errorMessage);
+            return ResponseEntity.badRequest().body(errorMessage);
         }
         
         cargo.setTrain(null);
         cargoRepository.delete(cargo);
+        logger.info("Running deleteById() for Cargo. Record deleted.");
         return ResponseEntity.ok().build();
     }
 

@@ -4,6 +4,7 @@ import com.codecool.trainscheduleapi.DTO.StopDTO;
 import com.codecool.trainscheduleapi.DTO.StopSelectionDTO;
 import com.codecool.trainscheduleapi.entity.Stop;
 import com.codecool.trainscheduleapi.repository.StopRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,13 +31,16 @@ public class StopService {
         return stopRepository.findById(id);
     }
 
-    public ResponseEntity<?> findStopByNameAndTrainId(String stopName, Long trainId) {
+    public ResponseEntity<?> findStopByNameAndTrainId(String stopName, Long trainId, Logger logger) {
         Optional<Stop> stop = stopRepository.findStopByNameAndTrainId(stopName, trainId);
 
-        if(stop.isEmpty())
+        if(stop.isEmpty()) {
+            logger.error("findStopByNameAndTrainId() for Stop returned with error 404: Record not found.");
             return ResponseEntity.notFound().build();
-        else
+        } else {
+            logger.info("Running findStopByNameAndTrainId() for Stop. Record found.");
             return ResponseEntity.ok().body(new StopDTO(stop.get()));
+        }
     }
 
     public StopDTO save(StopSelectionDTO stopSelectionDTO) {
@@ -45,28 +49,34 @@ public class StopService {
         return new StopDTO(stopRepository.save(stop));
     }
 
-    public ResponseEntity<?> update(StopSelectionDTO stopSelectionDTO, Long id) {
+    public ResponseEntity<?> update(StopSelectionDTO stopSelectionDTO, Long id, Logger logger) {
         Stop stop;
         try {
             stop = findById(id).orElseThrow();
         } catch (NoSuchElementException e) {
-            return ResponseEntity.badRequest().body("stop id not found");
+            String errorMessage = "Stop id not found";
+            logger.error("update() for Stop returned with error 400: Bad request. " + errorMessage);
+            return ResponseEntity.badRequest().body(errorMessage);
         }
 
         stop.setStopSelectionDTO(stopSelectionDTO);
+        logger.info("Running update() for Stop. Record updated.");
         return ResponseEntity.ok().body(new StopDTO(stopRepository.save(stop)));
     }
 
-    public ResponseEntity<?> deleteById(Long id) {
+    public ResponseEntity<?> deleteById(Long id, Logger logger) {
         Stop stop;
         try {
             stop = findById(id).orElseThrow();
         } catch (NoSuchElementException e) {
-            return ResponseEntity.badRequest().body("stop id not found");
+            String errorMessage = "Stop id not found";
+            logger.error("deleteById() for Stop returned with error 400: Bad request. " + errorMessage);
+            return ResponseEntity.badRequest().body(errorMessage);
         }
 
         stop.setTrain(null);
         stopRepository.delete(stop);
+        logger.info("Running deleteById() for Stop. Record deleted.");
         return ResponseEntity.ok().build();
     }
 

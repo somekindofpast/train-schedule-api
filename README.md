@@ -19,6 +19,7 @@ párat, hogy nagyobb legyen az adatbázis.
 TrainScheduleApiApplication:  
 Az alkalmazás elindításakor feláll a Spring Boot környezet és kapcsolódik az adatbázishoz.  
 Ezekután böngésző vagy API kliens segítségével (pl Postman) lekérdezéseket küldhetünk az API-nak.  
+A lekérdezések eredménye logolásra kerül a terminálon, illetve hiba esetén a hiba típusa és hibaüzenet.  
 Az endpointok megtekinthetők a Swagger UI elindításával. (http://localhost:8080/swagger-ui.html)
 
 Fő endpointok:  
@@ -26,5 +27,5 @@ GET: /schedule/passenger - az induló és érkező településneveket megadva vi
 azokról a személyvonatokról melyek áthaladnak ezeken a településeken, indulási idejük szerint sorrenbe rakva.  
 Kikalkulálódik emellett a megteendő út hossza és az utazás ideje.  
 GET: /schedule/freight - ugyanez tehervonatokkal  
-GET: /train/freight/{cargo_name} - a rakomány nevét megadva kilistázásra az összes tehervonat mely szállít  
+GET: /train/freight/{cargo_name} - a rakomány nevét megadva kilistázásra kerül az összes tehervonat mely szállít  
 ilyen rakományt.
