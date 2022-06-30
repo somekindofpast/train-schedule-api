@@ -46,23 +46,6 @@ public class StopController {
         }
     }
 
-    @GetMapping("/name/{name}/train_id/{train_id}")
-    public ResponseEntity<?> findStopByNameAndTrainId(@PathVariable("name") String name, @PathVariable("train_id") Long trainId) {
-        if(name == null || name.length() < 1 || 200 < name.length()) {
-            String errorMessage = "Stop name must be between 1-200 characters";
-            logger.error("findStopByNameAndTrainId() for Stop returned with error 400: Bad request. " + errorMessage);
-            return ResponseEntity.badRequest().body(errorMessage);
-        }
-
-        if(trainId == null || trainId < 0) {
-            String errorMessage = "Train id must be a non negative number";
-            logger.error("findStopByNameAndTrainId() for Stop returned with error 400: Bad request. " + errorMessage);
-            return ResponseEntity.badRequest().body(errorMessage);
-        }
-
-        return stopService.findStopByNameAndTrainId(name, trainId, logger);
-    }
-
     @PostMapping
     public ResponseEntity<?> save(@RequestBody @Valid StopSelectionDTO stopSelectionDTO, BindingResult errors) {
         if(errors.hasFieldErrors()) {

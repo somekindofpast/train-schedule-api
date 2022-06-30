@@ -123,7 +123,7 @@ public class TrainService {
         return ResponseEntity.ok().body(new CargoDTO(cargoRepository.save(cargo.get())));
     }
 
-    public ResponseEntity<?> update(Long id, String type, Logger logger) {
+    public ResponseEntity<?> update(TrainSelectionDTO trainSelectionDTO, Long id, Logger logger) {
         Train train;
         try {
             train = findById(id).orElseThrow();
@@ -133,13 +133,7 @@ public class TrainService {
             return ResponseEntity.badRequest().body(errorMessage);
         }
 
-        if(type == null || type.length() < 3) {
-            String errorMessage = "Train type is incorrect";
-            logger.error("update() for Train returned with error 400: Bad request. " + errorMessage);
-            return ResponseEntity.badRequest().body(errorMessage);
-        }
-
-        train.setType(type);
+        train.setType(trainSelectionDTO.getType());
         logger.info("Running update() for Train. Record updated.");
         return ResponseEntity.ok().body(new TrainDTO(trainRepository.save(train)));
     }

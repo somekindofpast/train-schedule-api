@@ -102,9 +102,15 @@ public class TrainController {
         return trainService.saveAddCargo(trainCargoDTO, logger);
     }
 
-    @PutMapping("/{id}/type/{type}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @PathVariable("type") String type) {
-        return trainService.update(id, type, logger);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody @Valid TrainSelectionDTO trainSelectionDTO, BindingResult errors, @PathVariable("id") Long id) {
+        if(errors.hasFieldErrors()) {
+            String errorMessage = ValidationUtility.getFieldErrorMessages(errors);
+            logger.error("update() for Train returned with error 400: Bad request. " + errorMessage);
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
+        return trainService.update(trainSelectionDTO, id, logger);
     }
 
     @DeleteMapping("/{id}")

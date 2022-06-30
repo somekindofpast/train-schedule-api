@@ -31,18 +31,6 @@ public class StopService {
         return stopRepository.findById(id);
     }
 
-    public ResponseEntity<?> findStopByNameAndTrainId(String stopName, Long trainId, Logger logger) {
-        Optional<Stop> stop = stopRepository.findStopByNameAndTrainId(stopName, trainId);
-
-        if(stop.isEmpty()) {
-            logger.error("findStopByNameAndTrainId() for Stop returned with error 404: Record not found.");
-            return ResponseEntity.notFound().build();
-        } else {
-            logger.info("Running findStopByNameAndTrainId() for Stop. Record found.");
-            return ResponseEntity.ok().body(new StopDTO(stop.get()));
-        }
-    }
-
     public StopDTO save(StopSelectionDTO stopSelectionDTO) {
         Stop stop = new Stop();
         stop.setStopSelectionDTO(stopSelectionDTO);

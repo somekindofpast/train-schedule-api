@@ -1,8 +1,6 @@
 package com.codecool.trainscheduleapi.service;
 
 import com.codecool.trainscheduleapi.DTO.ScheduleDTO;
-import com.codecool.trainscheduleapi.DTO.ScheduleSelectionDTO;
-import com.codecool.trainscheduleapi.DTO.StopDTO;
 import com.codecool.trainscheduleapi.DTO.TrainDTO;
 import com.codecool.trainscheduleapi.entity.Stop;
 import com.codecool.trainscheduleapi.entity.Train;
@@ -28,9 +26,10 @@ public class ScheduleService {
         this.stopRepository = stopRepository;
     }
 
-    public List<ScheduleDTO> listTrainSchedule(ScheduleSelectionDTO scheduleSelectionDTO, Boolean freight) {
+    public List<ScheduleDTO> listTrainSchedule(String departureLocation, String arrivalLocation, Boolean freight) {
 
-        List<Train> trains =  trainRepository.getTrainsByStops(scheduleSelectionDTO.getDepartureLocation(), scheduleSelectionDTO.getArrivalLocation());
+        List<Train> trains =  trainRepository.getTrainsByStops(departureLocation, arrivalLocation);
+
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
 
         for (Train train : trains) {
@@ -39,8 +38,8 @@ public class ScheduleService {
                 continue;
             }
 
-            Optional<Stop> departure = stopRepository.findStopByNameAndTrainId(scheduleSelectionDTO.getDepartureLocation(), train.getId());
-            Optional<Stop> arrival = stopRepository.findStopByNameAndTrainId(scheduleSelectionDTO.getArrivalLocation(), train.getId());
+            Optional<Stop> departure = stopRepository.findStopByNameAndTrainId(departureLocation, train.getId());
+            Optional<Stop> arrival = stopRepository.findStopByNameAndTrainId(arrivalLocation, train.getId());
 
             if(departure.isEmpty() || arrival.isEmpty() || arrival.get().getDistance() < departure.get().getDistance())
                 continue;

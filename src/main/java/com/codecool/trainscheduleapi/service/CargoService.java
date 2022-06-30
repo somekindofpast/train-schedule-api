@@ -38,7 +38,7 @@ public class CargoService {
     public CargoDTO save(CargoSelectionDTO cargoSelectionDTO) {
         Cargo cargo = new Cargo();
         cargo.setName(cargoSelectionDTO.getName());
-        cargo.setCarType(cargo.getCarType());
+        cargo.setCarType(cargoSelectionDTO.getCarType());
         return new CargoDTO(cargoRepository.save(cargo));
     }
 
@@ -53,7 +53,7 @@ public class CargoService {
         }
 
         cargo.setName(cargoSelectionDTO.getName());
-        cargo.setCarType(cargo.getCarType());
+        cargo.setCarType(cargoSelectionDTO.getCarType());
         logger.info("Running update() for Cargo. Record updated.");
         return ResponseEntity.ok().body(new CargoDTO(cargoRepository.save(cargo)));
     }
