@@ -22,6 +22,8 @@ public class ServiceDTO {
     private Boolean budapestPass;
 
     public ServiceDTO(Service service) {
+        if(service == null)
+            return;
         id = service.getId();
         if(service.getTrain() != null)
             trainId = service.getTrain().getId();

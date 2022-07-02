@@ -20,6 +20,8 @@ public class StopDTO {
     private Integer platform;
 
     public StopDTO(Stop stop) {
+        if(stop == null)
+            return;
         id = stop.getId();
         if(stop.getTrain() != null)
             trainId = stop.getTrain().getId();

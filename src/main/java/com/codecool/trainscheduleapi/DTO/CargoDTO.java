@@ -15,6 +15,8 @@ public class CargoDTO {
     private String carType;
 
     public CargoDTO(Cargo cargo) {
+        if(cargo == null)
+            return;
         id = cargo.getId();
         if(cargo.getTrain() != null)
             trainId = cargo.getTrain().getId();

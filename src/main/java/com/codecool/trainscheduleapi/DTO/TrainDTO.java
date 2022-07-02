@@ -22,20 +22,27 @@ public class TrainDTO {
     private List<CargoDTO> cargos;
 
     public TrainDTO(Train train) {
+        if(train == null)
+            return;
+
         id = train.getId();
         type = train.getType();
 
         stops = new ArrayList<>();
-        for (Stop stop : train.getStops()) {
-            stops.add(new StopDTO(stop));
+        if(train.getStops() != null) {
+            for (Stop stop : train.getStops()) {
+                stops.add(new StopDTO(stop));
+            }
         }
 
         if(train.getService() != null)
             service = new ServiceDTO(train.getService());
 
         cargos = new ArrayList<>();
-        for (Cargo cargo : train.getCargos()) {
-            cargos.add(new CargoDTO(cargo));
+        if(train.getCargos() != null) {
+            for (Cargo cargo : train.getCargos()) {
+                cargos.add(new CargoDTO(cargo));
+            }
         }
     }
 }

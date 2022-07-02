@@ -47,7 +47,8 @@ public class TrainService {
         List<Cargo> cargoList = cargoRepository.findCargoByName(cargoName);
         Set<TrainDTO> trainDTOList = new HashSet<>();
         for (Cargo cargo : cargoList) {
-            trainDTOList.add(new TrainDTO(cargo.getTrain()));
+            if(cargo.getTrain() != null)
+                trainDTOList.add(new TrainDTO(cargo.getTrain()));
         }
         return trainDTOList;
     }
@@ -69,7 +70,6 @@ public class TrainService {
             logger.error("saveAddStop() for Train returned with error 400: Bad request. " + errorMessage);
             return ResponseEntity.badRequest().body(errorMessage);
         }
-
 
         Optional<Stop> stop = stopRepository.findById(trainStopDTO.getStopId());
         if(stop.isEmpty()) {

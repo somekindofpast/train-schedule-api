@@ -18,8 +18,8 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/passenger/{departureLocation}/{arrivalLocation}")
-    public ResponseEntity<?> getPassengerTrainSchedule(@PathVariable("departureLocation") String departureLocation, @PathVariable("arrivalLocation") String arrivalLocation) {
+    @GetMapping("/passenger/{departure_location}/{arrival_location}")
+    public ResponseEntity<?> getPassengerTrainSchedule(@PathVariable("departure_location") String departureLocation, @PathVariable("arrival_location") String arrivalLocation) {
         if(departureLocation == null || departureLocation.length() < 1 || 200 < departureLocation.length()) {
             String errorMessage = "DepartureLocation must be between 1-200 characters long";
             logger.error("getPassengerTrainSchedule() for Schedule returned with error 400: Bad request. " + errorMessage);
@@ -36,8 +36,8 @@ public class ScheduleController {
         return ResponseEntity.ok().body(scheduleService.listTrainSchedule(departureLocation, arrivalLocation, false));
     }
 
-    @GetMapping("/freight/{departureLocation}/{arrivalLocation}")
-    public ResponseEntity<?> getFreightTrainSchedule(@PathVariable("departureLocation") String departureLocation, @PathVariable("arrivalLocation") String arrivalLocation) {
+    @GetMapping("/freight/{departure_location}/{arrival_location}")
+    public ResponseEntity<?> getFreightTrainSchedule(@PathVariable("departure_location") String departureLocation, @PathVariable("arrival_location") String arrivalLocation) {
         if(departureLocation == null || departureLocation.length() < 1 || 200 < departureLocation.length()) {
             String errorMessage = "DepartureLocation must be between 1-200 characters long";
             logger.error("getFreightTrainSchedule() for Schedule returned with error 400: Bad request. " + errorMessage);
