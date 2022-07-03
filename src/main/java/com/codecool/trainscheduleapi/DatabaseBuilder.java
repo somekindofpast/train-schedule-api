@@ -14,6 +14,10 @@ public class DatabaseBuilder {
     private static List<List<String>> cargo = new ArrayList<>();
 
     public static void main(String[] args) {
+        run();
+    }
+
+    public static void run() {
         Flyway flyway = Flyway.configure().dataSource(System.getenv("DATABASE_URL"), System.getenv("DATABASE_USERNAME"), System.getenv("DATABASE_PASSWORD")).load();
 
         flyway.clean();
