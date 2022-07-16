@@ -44,21 +44,23 @@ public class ScheduleService {
             if(departure.isEmpty() || arrival.isEmpty() || arrival.get().getDistance() < departure.get().getDistance())
                 continue;
 
-            ScheduleDTO scheduleDTO = new ScheduleDTO();
-            scheduleDTO.setDepartureTime(departure.get().getDepartureTime());
-            scheduleDTO.setDepartureLocation(departure.get().getName());
-            scheduleDTO.setArrivalTime(arrival.get().getArrivalTime());
-            scheduleDTO.setArrivalLocation(arrival.get().getName());
-            scheduleDTO.setTravelTime(MillisecondsToTimeUnits(scheduleDTO.getArrivalTime().getTime() - scheduleDTO.getDepartureTime().getTime()));
-            scheduleDTO.setTravelDistance(arrival.get().getDistance() - departure.get().getDistance());
-
-            scheduleDTO.setTrainDTO(new TrainDTO(train));
-            scheduleDTOList.add(scheduleDTO);
+            scheduleDTOList.add(createScheduleDTO(train, departure, arrival));
         }
 
-        return scheduleDTOList.stream()
-                .sorted(Comparator.comparing(ScheduleDTO :: getDepartureTime))
-                .collect(Collectors.toList());
+        scheduleDTOList.sort(Comparator.comparing(ScheduleDTO :: getDepartureTime));
+        return scheduleDTOList;
+    }
+
+    private ScheduleDTO createScheduleDTO(Train train, Optional<Stop> departure, Optional<Stop> arrival) {
+        ScheduleDTO scheduleDTO = new ScheduleDTO();
+        scheduleDTO.setDepartureTime(departure.get().getDepartureTime());
+        scheduleDTO.setDepartureLocation(departure.get().getName());
+        scheduleDTO.setArrivalTime(arrival.get().getArrivalTime());
+        scheduleDTO.setArrivalLocation(arrival.get().getName());
+        scheduleDTO.setTravelTime(MillisecondsToTimeUnits(scheduleDTO.getArrivalTime().getTime() - scheduleDTO.getDepartureTime().getTime()));
+        scheduleDTO.setTravelDistance(arrival.get().getDistance() - departure.get().getDistance());
+        scheduleDTO.setTrainDTO(new TrainDTO(train));
+        return scheduleDTO;
     }
 
     private String MillisecondsToTimeUnits(long milliSeconds) {
